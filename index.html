@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Caldero Mágico | Candelas Fantásticas</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f7c6d9, #cde8d6);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            background-color: rgba(255, 255, 255, 0.88);
+            padding: 60px 80px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: #b85c7a;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-style: italic;
+            color: #6fa58c;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero button {
+            background-color: #cde8d6;
+            color: #4f7f6a;
+            border: none;
+            padding: 14px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            transition: all 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #f7c6d9;
+            color: #9c4f6a;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>El Caldero Mágico</h1>
+        <h2>Candelas fantásticas, naturales y no tóxicas</h2>
+        <p>
+            Cada candela es una poción de luz: aromas encantados, ceras vegetales
+            y un brillo que transforma tu espacio en un refugio mágico.
+        </p>
+
+        <div class="gallery">
+            <img src="photo-1720671847847-0b127f440aa3.avif" alt="Candela fantástica rosada">
+            <img src="photo-1720788810349-7e51a042404a.avif" alt="Candela mágica verde">
+            <img src="photo-1596433809252-260c2745dfdd.avif" alt="Candela mística artesanal">
+            <img src="photo-1603218678692-3967d7523bb0.avif" alt="Candelas encantadas">
+        </div>
+
+        <button>Explorar hechizos</button>
+    </section>
+
+</body>
+</html>
