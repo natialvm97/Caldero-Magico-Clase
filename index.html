@@ -64,7 +64,14 @@
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
         }
 
-        .hero button {
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
             background-color: #cde8d6;
             color: #4f7f6a;
             border: none;
@@ -76,9 +83,64 @@
             transition: all 0.3s ease;
         }
 
-        .hero button:hover {
+        button:hover {
             background-color: #f7c6d9;
             color: #9c4f6a;
+        }
+
+        /* POPUP */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .popup-content h3 {
+            text-align: center;
+            color: #b85c7a;
+            margin-bottom: 20px;
+        }
+
+        .popup-content label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .popup-content input,
+        .popup-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        .popup-content textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .popup-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -99,8 +161,62 @@
             <img src="photo-1603218678692-3967d7523bb0.avif" alt="Candelas encantadas">
         </div>
 
-        <button>Explorar hechizos</button>
+        <div class="buttons">
+            <button>Explorar hechizos</button>
+            <button onclick="openPopup()">Contactar por correo</button>
+        </div>
     </section>
+
+    <!-- POPUP FORMULARIO -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Contacto mágico ✨</h3>
+            <form id="contactForm">
+                <label>Fecha</label>
+                <input type="text" id="date" readonly>
+
+                <label>Correo electrónico</label>
+                <input type="email" id="email" required>
+
+                <label>Mensaje</label>
+                <textarea id="message" required></textarea>
+
+                <div class="popup-actions">
+                    <button type="submit">Enviar</button>
+                    <button type="button" onclick="closePopup()">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+            document.getElementById('date').value = new Date().toLocaleDateString();
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const data = {
+                date: document.getElementById('date').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            let messages = JSON.parse(localStorage.getItem('mensajes')) || [];
+            messages.push(data);
+            localStorage.setItem('mensajes', JSON.stringify(messages));
+
+            alert('Mensaje guardado localmente ✨');
+            this.reset();
+            closePopup();
+        });
+    </script>
 
 </body>
 </html>
