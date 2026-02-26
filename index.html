@@ -174,9 +174,12 @@
         </div>
 
         <div class="buttons">
-            <button>Explorar hechizos</button>
-            <button onclick="openPopup()">Contactar por correo</button>
-        </div>
+   <button onclick="window.location.href='hechizos.html'">
+    Explorar hechizos
+</button>
+    <button onclick="openPopup()">Contactar por correo</button>
+    <button onclick="openPayment()">Pagos</button>
+    </div>
 
         <img src="2.png" alt="Banner Candelas de Soya" class="banner">
     </section>
@@ -202,35 +205,118 @@
             </form>
         </div>
     </div>
+<div class="popup" id="paymentPopup">
+    <div class="popup-content">
+        <h3>Pago Seguro ✨</h3>
+        <form id="paymentForm">
 
-    <script>
-        function openPopup() {
-            document.getElementById('popup').style.display = 'flex';
-            document.getElementById('date').value = new Date().toLocaleDateString();
+            <label>Nombre completo</label>
+            <input type="text" id="fullName" required>
+
+            <label>Cédula / ID</label>
+            <input type="text" id="idNumber" required>
+
+            <label>Correo electrónico</label>
+            <input type="email" id="payEmail" required>
+
+            <label>Tipo de artículo</label>
+            <input type="text" id="itemType" placeholder="Ej: Candela aromática" required>
+
+            <label>Método de pago</label>
+            <select id="paymentMethod" required>
+                <option value="">Seleccione</option>
+                <option>Tarjeta</option>
+                <option>Sinpe</option>
+                <option>Transferencia</option>
+            </select>
+
+            <label>Monto ($)</label>
+            <input type="number" id="amount" required>
+
+            <div class="popup-actions">
+                <button type="submit">Confirmar Compra</button>
+                <button type="button" onclick="closePayment()">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+  <script>
+    function openPopup() {
+        document.getElementById('popup').style.display = 'flex';
+        document.getElementById('date').value = new Date().toLocaleDateString();
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    function openPayment() {
+        document.getElementById('paymentPopup').style.display = 'flex';
+    }
+
+    function closePayment() {
+        document.getElementById('paymentPopup').style.display = 'none';
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Mensaje guardado localmente ✨');
+        this.reset();
+        closePopup();
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('fullName').value;
+        const id = document.getElementById('idNumber').value;
+        const email = document.getElementById('payEmail').value;
+        const item = document.getElementById('itemType').value;
+        const method = document.getElementById('paymentMethod').value;
+        const amount = document.getElementById('amount').value;
+
+        if (!name || !id || !email || !item || !method || !amount) {
+            alert("Debe completar todos los campos ✨");
+            return;
         }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
+        const now = new Date();
+        const date = now.toLocaleDateString();
+        const time = now.toLocaleTimeString();
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        const invoice = `
+            FACTURA OFICIAL
+            ----------------------------
+            Empresa: El Caldero Mágico
+            Fecha: ${date}
+            Hora: ${time}
 
-            const data = {
-                date: document.getElementById('date').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
+            Cliente: ${name}
+            ID: ${id}
+            Correo: ${email}
 
-            let messages = JSON.parse(localStorage.getItem('mensajes')) || [];
-            messages.push(data);
-            localStorage.setItem('mensajes', JSON.stringify(messages));
+            Artículo: ${item}
+            Medio de Pago: ${method}
+            Monto: $${amount}
 
-            alert('Mensaje guardado localmente ✨');
-            this.reset();
-            closePopup();
-        });
-    </script>
+            Garantía: 30 días por defectos de fabricación
+            ----------------------------
+            Gracias por su compra ✨
+        `;
+
+        const blob = new Blob([invoice], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Factura_El_Caldero_Magico.txt";
+        link.click();
+
+        alert("Compra realizada con éxito ✨ Factura generada.");
+
+        this.reset();
+        closePayment();
+    });
+</script>
 
 </body>
 </html>
