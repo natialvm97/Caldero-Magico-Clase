@@ -1,321 +1,295 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Caldero Mágico | Candelas Fantásticas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorar Hechizos | El Caldero Mágico</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, #f7c6d9, #cde8d6);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<style>
+body{
+    font-family:'Playfair Display', serif;
+    background: linear-gradient(135deg,#f7c6d9,#cde8d6);
+    margin:0;
+    padding:40px;
+    transition:0.5s;
+}
 
-        .hero {
-            background-color: rgba(255, 255, 255, 0.88);
-            padding: 60px 80px;
-            border-radius: 24px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-            max-width: 900px;
-        }
+h1{
+    text-align:center;
+    color:#b85c7a;
+    font-family:'Great Vibes', cursive;
+    font-size:48px;
+    margin-bottom:40px;
+}
 
-        .hero h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 64px;
-            color: #b85c7a;
-            margin-bottom: 10px;
-        }
+.card{
+    background:rgba(255,255,255,0.9);
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    transition:0.5s;
+}
 
-        .hero h2 {
-            font-size: 24px;
-            font-style: italic;
-            color: #6fa58c;
-            margin-bottom: 30px;
-        }
+button{
+    margin-top:10px;
+    padding:10px 18px;
+    border:none;
+    border-radius:25px;
+    background:#cde8d6;
+    color:#4f7f6a;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .hero p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
+button:hover{
+    background:#f7c6d9;
+    color:#9c4f6a;
+}
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+.resultado{
+    margin-top:10px;
+    font-weight:bold;
+    color:#6fa58c;
+}
 
-        .gallery img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-        }
+/* 🌙 MODO OSCURO */
+.dark-mode{
+    background:linear-gradient(135deg,#2b0036,#3d0052);
+    color:white;
+}
 
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.dark-mode .card{
+    background:rgba(60,0,80,0.85);
+}
 
-        button {
-            background-color: #cde8d6;
-            color: #4f7f6a;
-            border: none;
-            padding: 14px 40px;
-            font-size: 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Playfair Display', serif;
-            transition: all 0.3s ease;
-        }
+.dark-mode button{
+    background:#5e2a84;
+    color:white;
+}
 
-        button:hover {
-            background-color: #f7c6d9;
-            color: #9c4f6a;
-        }
+/* ✨ ESTRELLAS */
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    pointer-events:none;
+    overflow:hidden;
+    display:none;
+}
 
-        /* POPUP */
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
+.dark-mode .stars{
+    display:block;
+}
 
-        .popup-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: left;
-        }
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:0;
+    animation:twinkle 2s infinite ease-in-out;
+}
 
-        .popup-content h3 {
-            text-align: center;
-            color: #b85c7a;
-            margin-bottom: 20px;
-        }
-
-        .popup-content label {
-            display: block;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .popup-content input,
-        .popup-content textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-family: inherit;
-        }
-
-        .popup-content textarea {
-            resize: none;
-            height: 100px;
-        }
-
-        .popup-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-    </style>
-    <style>
-        .banner {
-            width: 100%;
-            max-width: 1100px;
-            display: block;
-            margin: 40px auto;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-    </style>
+@keyframes twinkle{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+</style>
 </head>
+
 <body>
 
-    <section class="hero">
-        <h1>El Caldero Mágico</h1>
-        <h2>Candelas fantásticas, naturales y no tóxicas</h2>
-        <p>
-            Cada candela es una poción de luz: aromas encantados, ceras vegetales
-            y un brillo que transforma tu espacio en un refugio mágico.
-        </p>
+<div class="stars" id="stars"></div>
 
-        <img src="banner 1 v2.png" alt="Banner El Caldero Mágico" class="banner">
+<h1>✨ Sistema Académico Mágico ✨</h1>
 
-        <div class="gallery">
-            <img src="photo-1720671847847-0b127f440aa3.avif" alt="Candela fantástica rosada">
-            <img src="photo-1720788810349-7e51a042404a.avif" alt="Candela mágica verde">
-            <img src="photo-1596433809252-260c2745dfdd.avif" alt="Candela mística artesanal">
-            <img src="photo-1603218678692-3967d7523bb0.avif" alt="Candelas encantadas">
-        </div>
-
-        <div class="buttons">
-   <button onclick="window.location.href='hechizos.html'">
-    Explorar hechizos
-</button>
-    <button onclick="openPopup()">Contactar por correo</button>
-    <button onclick="openPayment()">Pagos</button>
-    </div>
-
-        <img src="2.png" alt="Banner Candelas de Soya" class="banner">
-    </section>
-
-    <!-- POPUP FORMULARIO -->
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <h3>Contacto mágico ✨</h3>
-            <form id="contactForm">
-                <label>Fecha</label>
-                <input type="text" id="date" readonly>
-
-                <label>Correo electrónico</label>
-                <input type="email" id="email" required>
-
-                <label>Mensaje</label>
-                <textarea id="message" required></textarea>
-
-                <div class="popup-actions">
-                    <button type="submit">Enviar</button>
-                    <button type="button" onclick="closePopup()">Cerrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-<div class="popup" id="paymentPopup">
-    <div class="popup-content">
-        <h3>Pago Seguro ✨</h3>
-        <form id="paymentForm">
-
-            <label>Nombre completo</label>
-            <input type="text" id="fullName" required>
-
-            <label>Cédula / ID</label>
-            <input type="text" id="idNumber" required>
-
-            <label>Correo electrónico</label>
-            <input type="email" id="payEmail" required>
-
-            <label>Tipo de artículo</label>
-            <input type="text" id="itemType" placeholder="Ej: Candela aromática" required>
-
-            <label>Método de pago</label>
-            <select id="paymentMethod" required>
-                <option value="">Seleccione</option>
-                <option>Tarjeta</option>
-                <option>Sinpe</option>
-                <option>Transferencia</option>
-            </select>
-
-            <label>Monto ($)</label>
-            <input type="number" id="amount" required>
-
-            <div class="popup-actions">
-                <button type="submit">Confirmar Compra</button>
-                <button type="button" onclick="closePayment()">Cerrar</button>
-            </div>
-        </form>
-    </div>
+<!-- 1 -->
+<div class="card">
+<h3>1️⃣ Registrar Estudiante</h3>
+<input type="text" id="nombre">
+<button onclick="registrar()">Registrar</button>
+<div id="res1" class="resultado"></div>
 </div>
 
-  <script>
-    function openPopup() {
-        document.getElementById('popup').style.display = 'flex';
-        document.getElementById('date').value = new Date().toLocaleDateString();
+<!-- 2 -->
+<div class="card">
+<h3>2️⃣ Calcular Promedio</h3>
+<input type="number" id="n1">
+<input type="number" id="n2">
+<input type="number" id="n3">
+<button onclick="promedio()">Calcular</button>
+<div id="res2" class="resultado"></div>
+</div>
+
+<!-- 3 -->
+<div class="card">
+<h3>3️⃣ Activar Estado</h3>
+<p id="estado">Estado: Inactivo</p>
+<button onclick="activar()">Activar</button>
+</div>
+
+<!-- 4 -->
+<div class="card">
+<h3>4️⃣ Listar Cursos</h3>
+<button onclick="listarCursos()">Mostrar Cursos</button>
+<ul id="lista"></ul>
+</div>
+
+<!-- 5 -->
+<div class="card">
+<h3>5️⃣ Duplicar Notas</h3>
+<button onclick="duplicar()">Duplicar</button>
+<div id="res5" class="resultado"></div>
+</div>
+
+<!-- 6 -->
+<div class="card">
+<h3>6️⃣ Evento de Confirmación</h3>
+<button id="eventoBtn">Confirmar Matrícula</button>
+</div>
+
+<!-- 7 -->
+<div class="card">
+<h3>7️⃣ Cambiar Tema</h3>
+<button onclick="temaOscuro()">Activar / Desactivar Modo Oscuro</button>
+</div>
+
+<!-- 8 -->
+<div class="card">
+<h3>8️⃣ Validar Edad</h3>
+<input type="number" id="edad">
+<button onclick="validarEdad()">Validar</button>
+<div id="res8" class="resultado"></div>
+</div>
+
+<!-- 9 -->
+<div class="card">
+<h3>9️⃣ Contador Automático</h3>
+<button onclick="iniciarContador()">Iniciar</button>
+<div id="contador">0</div>
+</div>
+
+<!-- 10 -->
+<div class="card">
+<h3>🔟 Limpiar Sistema</h3>
+<button onclick="limpiar()">Limpiar Todo</button>
+</div>
+
+<script>
+
+/* ✨ ESTRELLAS */
+function crearEstrellas(){
+    const contenedor=document.getElementById("stars");
+    contenedor.innerHTML="";
+    for(let i=0;i<80;i++){
+        let estrella=document.createElement("div");
+        estrella.classList.add("star");
+        estrella.style.top=Math.random()*100+"%";
+        estrella.style.left=Math.random()*100+"%";
+        estrella.style.animationDelay=Math.random()*2+"s";
+        contenedor.appendChild(estrella);
     }
+}
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
+/* 1 */
+function registrar(){
+let nombre=document.getElementById("nombre").value;
+if(nombre===""){
+alert("Debe ingresar nombre");
+}else{
+document.getElementById("res1").textContent="Estudiante "+nombre+" registrado.";
+}
+}
 
-    function openPayment() {
-        document.getElementById('paymentPopup').style.display = 'flex';
-    }
+/* 2 */
+function promedio(){
+let a=parseFloat(document.getElementById("n1").value);
+let b=parseFloat(document.getElementById("n2").value);
+let c=parseFloat(document.getElementById("n3").value);
+if(isNaN(a)||isNaN(b)||isNaN(c)){
+alert("Ingrese las tres notas");
+return;
+}
+let prom=(a+b+c)/3;
+document.getElementById("res2").textContent="Promedio: "+prom.toFixed(2);
+}
 
-    function closePayment() {
-        document.getElementById('paymentPopup').style.display = 'none';
-    }
+/* 3 */
+function activar(){
+let est=document.getElementById("estado");
+est.textContent="Estado: Activo";
+est.style.color="lightgreen";
+}
 
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Mensaje guardado localmente ✨');
-        this.reset();
-        closePopup();
-    });
+/* 4 */
+function listarCursos(){
+let cursos=["Contabilidad","Finanzas","Economía","Auditoría"];
+let ul=document.getElementById("lista");
+ul.innerHTML="";
+cursos.forEach(function(c){
+let li=document.createElement("li");
+li.textContent=c;
+ul.appendChild(li);
+});
+}
 
-    document.getElementById('paymentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+/* 5 */
+function duplicar(){
+let notas=[60,70,80];
+let nuevas=notas.map(n=>n*2);
+document.getElementById("res5").textContent="Notas duplicadas: "+nuevas;
+}
 
-        const name = document.getElementById('fullName').value;
-        const id = document.getElementById('idNumber').value;
-        const email = document.getElementById('payEmail').value;
-        const item = document.getElementById('itemType').value;
-        const method = document.getElementById('paymentMethod').value;
-        const amount = document.getElementById('amount').value;
+/* 6 */
+document.getElementById("eventoBtn").addEventListener("click",function(){
+alert("Matrícula confirmada correctamente");
+});
 
-        if (!name || !id || !email || !item || !method || !amount) {
-            alert("Debe completar todos los campos ✨");
-            return;
-        }
+/* 7 */
+function temaOscuro(){
+document.body.classList.toggle("dark-mode");
+if(document.body.classList.contains("dark-mode")){
+crearEstrellas();
+}
+}
 
-        const now = new Date();
-        const date = now.toLocaleDateString();
-        const time = now.toLocaleTimeString();
+/* 8 */
+function validarEdad(){
+let edad=parseInt(document.getElementById("edad").value);
+if(isNaN(edad)){
+alert("Ingrese edad");
+return;
+}
+if(edad>=18){
+document.getElementById("res8").textContent="Mayor de edad";
+}else{
+document.getElementById("res8").textContent="Menor de edad";
+}
+}
 
-        const invoice = `
-            FACTURA OFICIAL
-            ----------------------------
-            Empresa: El Caldero Mágico
-            Fecha: ${date}
-            Hora: ${time}
+/* 9 */
+let contador=0;
+let intervalo;
+function iniciarContador(){
+if(intervalo) return;
+intervalo=setInterval(function(){
+contador++;
+document.getElementById("contador").textContent=contador;
+},1000);
+}
 
-            Cliente: ${name}
-            ID: ${id}
-            Correo: ${email}
+/* 10 */
+function limpiar(){
+location.reload();
+}
 
-            Artículo: ${item}
-            Medio de Pago: ${method}
-            Monto: $${amount}
-
-            Garantía: 30 días por defectos de fabricación
-            ----------------------------
-            Gracias por su compra ✨
-        `;
-
-        const blob = new Blob([invoice], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "Factura_El_Caldero_Magico.txt";
-        link.click();
-
-        alert("Compra realizada con éxito ✨ Factura generada.");
-
-        this.reset();
-        closePayment();
-    });
 </script>
 
 </body>
