@@ -97,7 +97,7 @@ border-radius:16px;
 box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* POPUP */
+/* POPUPS */
 
 .popup{
 position:fixed;
@@ -190,7 +190,7 @@ Cada candela es una poción de luz: aromas encantados, ceras vegetales
 y un brillo que transforma tu espacio en un refugio mágico.
 </p>
 
-<img src="banner 1 v2.png" alt="Banner El Caldero Mágico" class="banner">
+<img src="banner 1 v2.png" class="banner">
 
 <div class="gallery">
 <img src="photo-1720671847847-0b127f440aa3.avif">
@@ -219,7 +219,7 @@ Pagos
 
 </div>
 
-<img src="2.png" alt="Banner Candelas de Soya" class="banner">
+<img src="2.png" class="banner">
 
 </section>
 
@@ -299,46 +299,58 @@ Pagos
 <h3>Catálogo de Candelas ✨</h3>
 
 <div class="catalog-section">
+<h4>Velas en recipientes de vidrio</h4>
+<div class="catalog-grid">
+<img src="Vidrio.png">
+<img src="Vidrio 2.png">
+<img src="Vidrio 3.png">
+<img src="Vidrio 4.png">
+<img src="Vidrio 5.png">
+</div>
+</div>
+
+<div class="catalog-section">
 <h4>Velas de arena</h4>
 <div class="catalog-grid">
-<img src="https://picsum.photos/seed/a1/200">
-<img src="https://picsum.photos/seed/a2/200">
-<img src="https://picsum.photos/seed/a3/200">
-<img src="https://picsum.photos/seed/a4/200">
-<img src="https://picsum.photos/seed/a5/200">
+<img src="Arena.png">
+<img src="Arena 2.png">
+<img src="Arena 3.png">
+<img src="Arena 4.png">
+<img src="Arena 5.png">
 </div>
 </div>
 
 <div class="catalog-section">
 <h4>Velas largas</h4>
 <div class="catalog-grid">
-<img src="https://picsum.photos/seed/b1/200">
-<img src="https://picsum.photos/seed/b2/200">
-<img src="https://picsum.photos/seed/b3/200">
-<img src="https://picsum.photos/seed/b4/200">
-<img src="https://picsum.photos/seed/b5/200">
+<img src="Larga.png">
+<img src="Larga 2.png">
+<img src="Larga 3.png">
+<img src="Larga 4.png">
+<img src="Larga 5.png">
 </div>
 </div>
 
 <div class="catalog-section">
-<h4>Velas con recipientes de vidrio</h4>
+<h4>Velas en recipientes de vidrio</h4>
 <div class="catalog-grid">
-<img src="https://picsum.photos/seed/c1/200">
-<img src="https://picsum.photos/seed/c2/200">
-<img src="https://picsum.photos/seed/c3/200">
-<img src="https://picsum.photos/seed/c4/200">
-<img src="https://picsum.photos/seed/c5/200">
+<img src="Vidrio.png">
+<img src="Vidrio 2.png">
+<img src="Vidrio 3.png">
+<img src="Vidrio 4.png">
+<img src="Vidrio 5.png">
 </div>
 </div>
 
 <div class="catalog-section">
 <h4>Velas decorativas</h4>
 <div class="catalog-grid">
-<img src="https://picsum.photos/seed/d1/200">
-<img src="https://picsum.photos/seed/d2/200">
-<img src="https://picsum.photos/seed/d3/200">
-<img src="https://picsum.photos/seed/d4/200">
-<img src="https://picsum.photos/seed/d5/200">
+<img src="Decorativa.png">
+<img src="Decorativa 1.png">
+<img src="Decorativa 2.png">
+<img src="Decorativa 3.png">
+<img src="Decorativa 4.png">
+<img src="Decorativa 5.png">
 </div>
 </div>
 
@@ -405,7 +417,6 @@ const time=now.toLocaleTimeString()
 
 const invoice=`
 FACTURA OFICIAL
-----------------------------
 Empresa: El Caldero Mágico
 Fecha: ${date}
 Hora: ${time}
@@ -418,8 +429,7 @@ Artículo: ${item}
 Medio de Pago: ${method}
 Monto: $${amount}
 
-Garantía: 30 días por defectos de fabricación
-----------------------------
+Garantía: 30 días
 Gracias por su compra ✨
 `
 
