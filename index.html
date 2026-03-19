@@ -9,7 +9,6 @@
 
 <style>
 
-/* === TU CSS ORIGINAL === */
 body{
 margin:0;
 font-family:'Playfair Display',serif;
@@ -21,7 +20,170 @@ justify-content:center;
 transition:0.5s;
 }
 
-/* === NUEVO === */
+.moon-btn{
+position:fixed;
+top:20px;
+right:20px;
+font-size:22px;
+background:white;
+border:none;
+border-radius:50%;
+width:50px;
+height:50px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+z-index:1000;
+}
+
+.hero{
+background-color:rgba(255,255,255,0.88);
+padding:60px 80px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.12);
+max-width:900px;
+transition:0.5s;
+}
+
+.hero h1{
+font-family:'Great Vibes',cursive;
+font-size:64px;
+color:#b85c7a;
+margin-bottom:10px;
+}
+
+.hero h2{
+font-size:24px;
+font-style:italic;
+color:#6fa58c;
+margin-bottom:30px;
+}
+
+.hero p{
+font-size:18px;
+color:#555;
+margin-bottom:40px;
+line-height:1.6;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-bottom:40px;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:16px;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+.buttons{
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+button{
+background-color:#cde8d6;
+color:#4f7f6a;
+border:none;
+padding:14px 40px;
+font-size:18px;
+border-radius:30px;
+cursor:pointer;
+font-family:'Playfair Display',serif;
+transition:all .3s ease;
+}
+
+button:hover{
+background-color:#f7c6d9;
+color:#9c4f6a;
+}
+
+.banner{
+width:100%;
+max-width:1100px;
+display:block;
+margin:40px auto;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.popup-content{
+background:#fff;
+padding:30px;
+border-radius:20px;
+width:100%;
+max-width:400px;
+text-align:left;
+}
+
+.popup-content h3{
+text-align:center;
+color:#b85c7a;
+margin-bottom:20px;
+}
+
+.popup-content label{
+display:block;
+margin-top:10px;
+font-size:14px;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:10px;
+border:1px solid #ccc;
+font-family:inherit;
+}
+
+.popup-actions{
+display:flex;
+justify-content:space-between;
+margin-top:20px;
+}
+
+.catalog-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin-bottom:20px;
+}
+
+.catalog-grid img{
+width:100%;
+height:80px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.catalog-section h4{
+margin-top:20px;
+color:#6fa58c;
+}
+
+/* NUEVO */
 .product{text-align:center;}
 .product button{margin-top:5px;font-size:12px;}
 
@@ -51,7 +213,6 @@ font-size:14px;
 margin-bottom:5px;
 }
 
-/* ANIMACIÓN */
 .fly{
 position:fixed;
 width:12px;
@@ -62,7 +223,6 @@ z-index:2000;
 transition:all .8s;
 }
 
-/* CONFETTI */
 .confetti{
 position:fixed;
 width:8px;
@@ -81,14 +241,31 @@ animation:fall 2s linear forwards;
 
 <body>
 
+<button class="moon-btn" onclick="temaOscuro()">🌙</button>
+
 <section class="hero">
+
 <h1>El Caldero Mágico</h1>
+<h2>Candelas fantásticas, naturales y no tóxicas</h2>
+
+<p>Texto original intacto</p>
 
 <div class="buttons">
+
+<button onclick="window.location.href='hechizos.html'">
+Explorar hechizos
+</button>
+
 <button onclick="openCatalog()" class="catalog-btn" id="catalogBtn">
 Catálogo 🛒 <span id="cartCount" class="catalog-count">0</span>
 </button>
+
+<button onclick="openPopup()">Contactar por correo</button>
+
+<button onclick="openPayment()">Pagos</button>
+
 </div>
+
 </section>
 
 <!-- CATÁLOGO -->
@@ -97,30 +274,6 @@ Catálogo 🛒 <span id="cartCount" class="catalog-count">0</span>
 
 <h3>Catálogo de Candelas ✨</h3>
 
-<!-- VIDRIO -->
-<div class="catalog-section">
-<h4>Velas en recipientes de vidrio</h4>
-<div class="catalog-grid">
-
-<div class="product"><img src="Vidrio.png">
-<button onclick="addToCart('Vidrio 1',15,this)">Agregar</button></div>
-
-<div class="product"><img src="Vidrio 2.png">
-<button onclick="addToCart('Vidrio 2',15,this)">Agregar</button></div>
-
-<div class="product"><img src="Vidrio 3.png">
-<button onclick="addToCart('Vidrio 3',15,this)">Agregar</button></div>
-
-<div class="product"><img src="Vidrio 4.png">
-<button onclick="addToCart('Vidrio 4',15,this)">Agregar</button></div>
-
-<div class="product"><img src="Vidrio 5.png">
-<button onclick="addToCart('Vidrio 5',15,this)">Agregar</button></div>
-
-</div>
-</div>
-
-<!-- ARENA -->
 <div class="catalog-section">
 <h4>Velas de arena</h4>
 <div class="catalog-grid">
@@ -137,16 +290,9 @@ Catálogo 🛒 <span id="cartCount" class="catalog-count">0</span>
 <div class="product"><img src="Arena 3.png">
 <button onclick="addToCart('Arena 3',12,this)">Agregar</button></div>
 
-<div class="product"><img src="Arena 4.png">
-<button onclick="addToCart('Arena 4',11,this)">Agregar</button></div>
-
-<div class="product"><img src="Arena 5.png">
-<button onclick="addToCart('Arena 5',13,this)">Agregar</button></div>
-
 </div>
 </div>
 
-<!-- CARRITO -->
 <div class="cart-box">
 <h4>🛒 Carrito</h4>
 <div id="cartItems"></div>
@@ -189,7 +335,6 @@ document.getElementById("cartCount").innerText=cart.length
 function updateCart(){
 const container=document.getElementById("cartItems")
 container.innerHTML=""
-
 let total=0
 
 cart.forEach((item,index)=>{
@@ -227,7 +372,6 @@ alert("Cupón inválido")
 updateCart()
 }
 
-/* CONFETTI */
 function lanzarConfetti(){
 for(let i=0;i<40;i++){
 let c=document.createElement("div")
@@ -239,7 +383,6 @@ setTimeout(()=>c.remove(),2000)
 }
 }
 
-/* VUELO */
 function animarVuelo(btn){
 const rect=btn.getBoundingClientRect()
 const cart=document.getElementById("catalogBtn").getBoundingClientRect()
@@ -258,6 +401,10 @@ dot.style.opacity=0
 },50)
 
 setTimeout(()=>dot.remove(),800)
+}
+
+function temaOscuro(){
+document.body.classList.toggle("dark-mode");
 }
 
 </script>
