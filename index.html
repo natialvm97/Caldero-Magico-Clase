@@ -20,10 +20,9 @@ justify-content:center;
 transition:0.5s;
 }
 
-.moon-btn{
+.moon-btn, .cart-btn{
 position:fixed;
 top:20px;
-right:20px;
 font-size:22px;
 background:white;
 border:none;
@@ -35,6 +34,9 @@ box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
 }
 
+.moon-btn{ right:20px; }
+.cart-btn{ right:80px; }
+
 .hero{
 background-color:rgba(255,255,255,0.88);
 padding:60px 80px;
@@ -42,28 +44,17 @@ border-radius:24px;
 text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.12);
 max-width:900px;
-transition:0.5s;
 }
 
 .hero h1{
 font-family:'Great Vibes',cursive;
 font-size:64px;
 color:#b85c7a;
-margin-bottom:10px;
 }
 
 .hero h2{
 font-size:24px;
-font-style:italic;
 color:#6fa58c;
-margin-bottom:30px;
-}
-
-.hero p{
-font-size:18px;
-color:#555;
-margin-bottom:40px;
-line-height:1.6;
 }
 
 .gallery{
@@ -78,7 +69,6 @@ width:100%;
 height:220px;
 object-fit:cover;
 border-radius:16px;
-box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
 
 .buttons{
@@ -96,13 +86,6 @@ padding:14px 40px;
 font-size:18px;
 border-radius:30px;
 cursor:pointer;
-font-family:'Playfair Display',serif;
-transition:all .3s ease;
-}
-
-button:hover{
-background-color:#f7c6d9;
-color:#9c4f6a;
 }
 
 .banner{
@@ -111,7 +94,6 @@ max-width:1100px;
 display:block;
 margin:40px auto;
 border-radius:16px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .popup{
@@ -132,43 +114,12 @@ padding:30px;
 border-radius:20px;
 width:100%;
 max-width:400px;
-text-align:left;
-}
-
-.popup-content h3{
-text-align:center;
-color:#b85c7a;
-margin-bottom:20px;
-}
-
-.popup-content label{
-display:block;
-margin-top:10px;
-font-size:14px;
-}
-
-.popup-content input,
-.popup-content textarea,
-.popup-content select{
-width:100%;
-padding:10px;
-margin-top:5px;
-border-radius:10px;
-border:1px solid #ccc;
-font-family:inherit;
-}
-
-.popup-actions{
-display:flex;
-justify-content:space-between;
-margin-top:20px;
 }
 
 .catalog-grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:10px;
-margin-bottom:20px;
 }
 
 .catalog-grid img{
@@ -176,64 +127,56 @@ width:100%;
 height:80px;
 object-fit:cover;
 border-radius:10px;
-}
-
-.catalog-section h4{
-margin-top:20px;
-color:#6fa58c;
-}
-
-/* NUEVO */
-.product{text-align:center;}
-.product button{margin-top:5px;font-size:12px;}
-
-.catalog-btn{position:relative;}
-.catalog-count{
-position:absolute;
-top:-8px;
-right:-8px;
-background:#b85c7a;
-color:white;
-border-radius:50%;
-padding:2px 6px;
-font-size:12px;
-}
-
-.cart-box{
-background:#f9f9f9;
-padding:10px;
-border-radius:10px;
-margin-top:20px;
+cursor:pointer;
 }
 
 .cart-item{
 display:flex;
 justify-content:space-between;
-font-size:14px;
-margin-bottom:5px;
+margin:10px 0;
 }
 
-.fly{
-position:fixed;
-width:12px;
-height:12px;
-background:#b85c7a;
-border-radius:50%;
-z-index:2000;
-transition:all .8s;
+.cart-total{
+font-weight:bold;
+margin-top:15px;
 }
 
-.confetti{
+.dark-mode{
+background:linear-gradient(135deg,#2b0036,#3d0052);
+color:white;
+}
+
+.dark-mode .hero{
+background:rgba(60,0,80,0.85);
+}
+
+.stars{
 position:fixed;
-width:8px;
-height:8px;
+width:100%;
+height:100%;
 top:0;
-animation:fall 2s linear forwards;
+left:0;
+display:none;
 }
 
-@keyframes fall{
-0%{transform:translateY(0);}
-100%{transform:translateY(100vh);}
+.dark-mode .stars{
+display:block;
+}
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0;
+animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
 }
 
 </style>
@@ -241,171 +184,135 @@ animation:fall 2s linear forwards;
 
 <body>
 
+<div class="stars" id="stars"></div>
+
 <button class="moon-btn" onclick="temaOscuro()">🌙</button>
+<button class="cart-btn" onclick="openCart()">🛒</button>
 
 <section class="hero">
 
 <h1>El Caldero Mágico</h1>
 <h2>Candelas fantásticas, naturales y no tóxicas</h2>
 
-<p>Texto original intacto</p>
+<p>Velas mágicas que iluminan tu energía ✨</p>
+
+<div class="gallery">
+<img src="photo-1720671847847-0b127f440aa3.avif">
+<img src="photo-1720788810349-7e51a042404a.avif">
+<img src="photo-1596433809252-260c2745dfdd.avif">
+<img src="photo-1603218678692-3967d7523bb0.avif">
+</div>
 
 <div class="buttons">
-
-<button onclick="window.location.href='hechizos.html'">
-Explorar hechizos
-</button>
-
-<button onclick="openCatalog()" class="catalog-btn" id="catalogBtn">
-Catálogo 🛒 <span id="cartCount" class="catalog-count">0</span>
-</button>
-
-<button onclick="openPopup()">Contactar por correo</button>
-
+<button onclick="openCatalog()">Catálogo</button>
+<button onclick="openPopup()">Contacto</button>
 <button onclick="openPayment()">Pagos</button>
-
 </div>
 
 </section>
 
-<!-- CATÁLOGO -->
-<div class="popup" id="catalogPopup">
-<div class="popup-content" style="max-width:900px">
+<!-- CARRITO -->
+<div class="popup" id="cartPopup">
+<div class="popup-content">
+<h3>Carrito 🛒</h3>
 
-<h3>Catálogo de Candelas ✨</h3>
-
-<div class="catalog-section">
-<h4>Velas de arena</h4>
-<div class="catalog-grid">
-
-<div class="product">
-<img src="Arena.png">
-<p style="color:red;">Sin stock</p>
-<button disabled>Agotado</button>
-</div>
-
-<div class="product"><img src="Arena 2.png">
-<button onclick="addToCart('Arena 2',10,this)">Agregar</button></div>
-
-<div class="product"><img src="Arena 3.png">
-<button onclick="addToCart('Arena 3',12,this)">Agregar</button></div>
-
-</div>
-</div>
-
-<div class="cart-box">
-<h4>🛒 Carrito</h4>
 <div id="cartItems"></div>
-<p>Total: $<span id="total">0</span></p>
+
+<div class="cart-total">
+Total: $<span id="cartTotal">0</span>
+</div>
 
 <input type="text" id="coupon" placeholder="Cupón">
 <button onclick="applyCoupon()">Aplicar</button>
+
+<br><br>
+<button onclick="closeCart()">Cerrar</button>
+</div>
 </div>
 
-<div class="popup-actions">
-<button onclick="closeCatalog()">Cerrar</button>
+<!-- CATALOGO -->
+<div class="popup" id="catalogPopup">
+<div class="popup-content" style="max-width:900px">
+
+<h3>Catálogo</h3>
+
+<div class="catalog-grid">
+<img src="Vidrio.png" onclick="agregarAlCarrito('Vela vidrio',10)">
+<img src="Arena.png" onclick="agregarAlCarrito('Vela arena',8)">
+<img src="Larga.png" onclick="agregarAlCarrito('Vela larga',12)">
+<img src="Decorativa 1.png" onclick="agregarAlCarrito('Decorativa',15)">
 </div>
+
+<button onclick="closeCatalog()">Cerrar</button>
 
 </div>
 </div>
 
 <script>
 
-let cart=[]
-let discount=0
-
-function openCatalog(){
-document.getElementById('catalogPopup').style.display='flex'
+/* 🌙 DARK */
+function crearEstrellas(){
+const c=document.getElementById("stars")
+c.innerHTML=""
+for(let i=0;i<80;i++){
+let e=document.createElement("div")
+e.className="star"
+e.style.top=Math.random()*100+"%"
+e.style.left=Math.random()*100+"%"
+c.appendChild(e)
 }
-function closeCatalog(){
-document.getElementById('catalogPopup').style.display='none'
-}
-
-function addToCart(name,price,btn){
-cart.push({name,price})
-updateCart()
-updateCounter()
-animarVuelo(btn)
-}
-
-function updateCounter(){
-document.getElementById("cartCount").innerText=cart.length
-}
-
-function updateCart(){
-const container=document.getElementById("cartItems")
-container.innerHTML=""
-let total=0
-
-cart.forEach((item,index)=>{
-total+=item.price
-const div=document.createElement("div")
-div.classList.add("cart-item")
-div.innerHTML=`
-${item.name} - $${item.price}
-<button onclick="removeItem(${index})">❌</button>`
-container.appendChild(div)
-})
-
-let finalTotal=total-(total*discount)
-document.getElementById("total").innerText=finalTotal.toFixed(2)
-}
-
-function removeItem(i){
-cart.splice(i,1)
-updateCart()
-updateCounter()
-}
-
-function applyCoupon(){
-const code=document.getElementById("coupon").value
-
-if(code==="MAGIA10"){
-discount=0.10
-lanzarConfetti()
-alert("Cupón aplicado ✨")
-}else{
-discount=0
-alert("Cupón inválido")
-}
-
-updateCart()
-}
-
-function lanzarConfetti(){
-for(let i=0;i<40;i++){
-let c=document.createElement("div")
-c.classList.add("confetti")
-c.style.left=Math.random()*100+"%"
-c.style.background=`hsl(${Math.random()*360},100%,60%)`
-document.body.appendChild(c)
-setTimeout(()=>c.remove(),2000)
-}
-}
-
-function animarVuelo(btn){
-const rect=btn.getBoundingClientRect()
-const cart=document.getElementById("catalogBtn").getBoundingClientRect()
-
-const dot=document.createElement("div")
-dot.classList.add("fly")
-dot.style.left=rect.left+"px"
-dot.style.top=rect.top+"px"
-
-document.body.appendChild(dot)
-
-setTimeout(()=>{
-dot.style.left=cart.left+"px"
-dot.style.top=cart.top+"px"
-dot.style.opacity=0
-},50)
-
-setTimeout(()=>dot.remove(),800)
 }
 
 function temaOscuro(){
-document.body.classList.toggle("dark-mode");
+document.body.classList.toggle("dark-mode")
+if(document.body.classList.contains("dark-mode")) crearEstrellas()
 }
+
+/* 🛒 CARRITO */
+let carrito=[]
+let descuento=0
+
+function agregarAlCarrito(nombre,precio){
+carrito.push({nombre,precio})
+renderCarrito()
+}
+
+function renderCarrito(){
+let cont=document.getElementById("cartItems")
+cont.innerHTML=""
+let total=0
+
+carrito.forEach((item,i)=>{
+total+=item.precio
+cont.innerHTML+=`
+<div class="cart-item">
+${item.nombre} - $${item.precio}
+<button onclick="eliminar(${i})">❌</button>
+</div>`
+})
+
+let final=total-(total*descuento)
+document.getElementById("cartTotal").innerText=final.toFixed(2)
+}
+
+function eliminar(i){
+carrito.splice(i,1)
+renderCarrito()
+}
+
+function applyCoupon(){
+let c=document.getElementById("coupon").value
+descuento = (c==="MAGIA10") ? 0.10 : 0
+alert(descuento ? "Cupón aplicado ✨" : "Cupón inválido")
+renderCarrito()
+}
+
+function openCart(){document.getElementById("cartPopup").style.display="flex"}
+function closeCart(){document.getElementById("cartPopup").style.display="none"}
+
+/* POPUPS */
+function openCatalog(){document.getElementById("catalogPopup").style.display="flex"}
+function closeCatalog(){document.getElementById("catalogPopup").style.display="none"}
 
 </script>
 
