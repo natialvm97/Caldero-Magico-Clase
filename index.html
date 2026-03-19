@@ -3,117 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Caldero Mágico | Candelas Fantásticas</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>El Caldero Mágico</title>
 
 <style>
 
 body{
 margin:0;
-font-family:'Playfair Display',serif;
+font-family:serif;
 background:linear-gradient(135deg,#f7c6d9,#cde8d6);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:0.5s;
 }
 
-.moon-btn{
-position:fixed;
-top:20px;
-right:20px;
-font-size:22px;
-background:white;
-border:none;
-border-radius:50%;
-width:50px;
-height:50px;
-cursor:pointer;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-z-index:1000;
-}
-
-.hero{
-background-color:rgba(255,255,255,0.88);
-padding:60px 80px;
-border-radius:24px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.12);
-max-width:900px;
-transition:0.5s;
-}
-
-.hero h1{
-font-family:'Great Vibes',cursive;
-font-size:64px;
-color:#b85c7a;
-margin-bottom:10px;
-}
-
-.hero h2{
-font-size:24px;
-font-style:italic;
-color:#6fa58c;
-margin-bottom:30px;
-}
-
-.hero p{
-font-size:18px;
-color:#555;
-margin-bottom:40px;
-line-height:1.6;
-}
-
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-margin-bottom:40px;
-}
-
-.gallery img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:16px;
-box-shadow:0 6px 18px rgba(0,0,0,0.15);
-}
-
-.buttons{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
+/* BOTONES */
 button{
-background-color:#cde8d6;
-color:#4f7f6a;
+padding:10px 20px;
 border:none;
-padding:14px 40px;
-font-size:18px;
-border-radius:30px;
+border-radius:20px;
 cursor:pointer;
-font-family:'Playfair Display',serif;
-transition:all .3s ease;
 }
 
-button:hover{
-background-color:#f7c6d9;
-color:#9c4f6a;
+/* CONTADOR CARRITO */
+#cartBtn{
+position:relative;
 }
 
-.banner{
-width:100%;
-max-width:1100px;
-display:block;
-margin:40px auto;
-border-radius:16px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
+#cartCount{
+position:absolute;
+top:-8px;
+right:-8px;
+background:red;
+color:white;
+border-radius:50%;
+padding:3px 7px;
+font-size:12px;
 }
 
+/* PRODUCTOS */
+.product{
+text-align:center;
+margin:10px;
+}
+.product button{
+margin-top:5px;
+}
+
+/* CARRITO */
+#cartItems div{
+display:flex;
+justify-content:space-between;
+margin-bottom:5px;
+}
+
+/* POPUPS */
 .popup{
 position:fixed;
 top:0;
@@ -127,105 +67,38 @@ justify-content:center;
 }
 
 .popup-content{
-background:#fff;
-padding:30px;
-border-radius:20px;
-width:100%;
-max-width:400px;
-text-align:left;
-}
-
-.popup-content h3{
-text-align:center;
-color:#b85c7a;
-margin-bottom:20px;
-}
-
-.popup-content label{
-display:block;
-margin-top:10px;
-font-size:14px;
-}
-
-.popup-content input,
-.popup-content textarea,
-.popup-content select{
-width:100%;
-padding:10px;
-margin-top:5px;
-border-radius:10px;
-border:1px solid #ccc;
-font-family:inherit;
-}
-
-.popup-actions{
-display:flex;
-justify-content:space-between;
-margin-top:20px;
-}
-
-.catalog-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-margin-bottom:20px;
-}
-
-.catalog-grid img{
-width:100%;
-height:80px;
-object-fit:cover;
-border-radius:10px;
-}
-
-.catalog-section h4{
-margin-top:20px;
-color:#6fa58c;
-}
-
-.dark-mode{
-background:linear-gradient(135deg,#2b0036,#3d0052);
-color:white;
-}
-
-.dark-mode .hero{
-background:rgba(60,0,80,0.85);
-}
-
-.dark-mode button{
-background:#5e2a84;
-color:white;
-}
-
-.stars{
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-pointer-events:none;
-overflow:hidden;
-display:none;
-}
-
-.dark-mode .stars{
-display:block;
-}
-
-.star{
-position:absolute;
-width:3px;
-height:3px;
 background:white;
-border-radius:50%;
-opacity:0;
-animation:twinkle 2s infinite ease-in-out;
+padding:20px;
+border-radius:15px;
+width:300px;
 }
 
-@keyframes twinkle{
-0%{opacity:0;}
-50%{opacity:1;}
-100%{opacity:0;}
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+top:0;
+opacity:0.8;
+animation:fall 2s linear forwards;
+z-index:2000;
+}
+
+@keyframes fall{
+0%{transform:translateY(0) rotate(0deg);opacity:1;}
+100%{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+
+/* ANIMACIÓN VUELA AL CARRITO */
+.fly{
+position:fixed;
+width:20px;
+height:20px;
+background:gold;
+border-radius:50%;
+z-index:2000;
+pointer-events:none;
+transition:all 0.8s ease-in-out;
 }
 
 </style>
@@ -233,271 +106,180 @@ animation:twinkle 2s infinite ease-in-out;
 
 <body>
 
-<div class="stars" id="stars"></div>
+<h1 style="text-align:center;">El Caldero Mágico ✨</h1>
 
-<button class="moon-btn" onclick="temaOscuro()">🌙</button>
-
-<section class="hero">
-
-<h1>El Caldero Mágico</h1>
-<h2>Candelas fantásticas, naturales y no tóxicas</h2>
-
-<p>
-Cada candela es una poción de luz: aromas encantados, ceras vegetales
-y un brillo que transforma tu espacio en un refugio mágico.
-</p>
-
-<img src="banner 1 v2.png" class="banner">
-
-<div class="gallery">
-<img src="photo-1720671847847-0b127f440aa3.avif">
-<img src="photo-1720788810349-7e51a042404a.avif">
-<img src="photo-1596433809252-260c2745dfdd.avif">
-<img src="photo-1603218678692-3967d7523bb0.avif">
-</div>
-
-<div class="buttons">
-
-<button onclick="window.location.href='hechizos.html'">
-Explorar hechizos
-</button>
-
+<div style="text-align:center;">
 <button onclick="openCatalog()">Catálogo</button>
 
-<button onclick="openPopup()">Contactar por correo</button>
-
-<button onclick="openPayment()">Pagos</button>
-
+<button id="cartBtn" onclick="openCart()">
+🛒 <span id="cartCount">0</span>
+</button>
 </div>
 
-<img src="2.png" class="banner">
-
-</section>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-
-<h3>Contacto mágico ✨</h3>
-
-<form id="contactForm">
-
-<label>Fecha</label>
-<input type="text" id="date" readonly>
-
-<label>Correo electrónico</label>
-<input type="email" id="email" required>
-
-<label>Mensaje</label>
-<textarea id="message" required></textarea>
-
-<div class="popup-actions">
-<button type="submit">Enviar</button>
-<button type="button" onclick="closePopup()">Cerrar</button>
-</div>
-
-</form>
-</div>
-</div>
-
-<div class="popup" id="paymentPopup">
-<div class="popup-content">
-
-<h3>Pago Seguro ✨</h3>
-
-<form id="paymentForm">
-
-<label>Nombre completo</label>
-<input type="text" id="fullName" required>
-
-<label>Cédula / ID</label>
-<input type="text" id="idNumber" required>
-
-<label>Correo electrónico</label>
-<input type="email" id="payEmail" required>
-
-<label>Tipo de artículo</label>
-<input type="text" id="itemType" required>
-
-<label>Método de pago</label>
-<select id="paymentMethod" required>
-<option value="">Seleccione</option>
-<option>Tarjeta</option>
-<option>Sinpe</option>
-<option>Transferencia</option>
-</select>
-
-<label>Monto ($)</label>
-<input type="number" id="amount" required>
-
-<div class="popup-actions">
-<button type="submit">Confirmar Compra</button>
-<button type="button" onclick="closePayment()">Cerrar</button>
-</div>
-
-</form>
-</div>
-</div>
-
+<!-- CATÁLOGO -->
 <div class="popup" id="catalogPopup">
-<div class="popup-content" style="max-width:900px">
+<div class="popup-content">
 
-<h3>Catálogo de Candelas ✨</h3>
+<h3>Catálogo</h3>
 
-<div class="catalog-section">
-<h4>Velas en recipientes de vidrio</h4>
-<div class="catalog-grid">
-<img src="Vidrio.png">
-<img src="Vidrio 2.png">
-<img src="Vidrio 3.png">
-<img src="Vidrio 4.png">
-<img src="Vidrio 5.png">
-</div>
-</div>
-
-<div class="catalog-section">
 <h4>Velas de arena</h4>
-<div class="catalog-grid">
-<img src="Arena.png">
-<img src="Arena 2.png">
-<img src="Arena 3.png">
-<img src="Arena 4.png">
-<img src="Arena 5.png">
-</div>
+
+<div class="product">
+<p>Arena 1</p>
+<p style="color:red;">Sin stock</p>
+<button disabled>Agotado</button>
 </div>
 
-<div class="catalog-section">
-<h4>Velas largas</h4>
-<div class="catalog-grid">
-<img src="Larga.png">
-<img src="Larga 2.png">
-<img src="Larga 3.png">
-<img src="Larga 4.png">
-<img src="Larga 5.png">
-</div>
+<div class="product">
+<p>Arena 2</p>
+<button onclick="addToCart('Arena 2',10, this)">Agregar</button>
 </div>
 
-<div class="catalog-section">
-<h4>Velas decorativas</h4>
-<div class="catalog-grid">
-<img src="Decorativa 1.png">
-<img src="Decorativa 2.png">
-<img src="Decorativa 3.png">
-<img src="Decorativa 4.png">
-<img src="Decorativa 5.png">
-</div>
+<div class="product">
+<p>Arena 3</p>
+<button onclick="addToCart('Arena 3',12, this)">Agregar</button>
 </div>
 
-<div class="popup-actions">
+<br>
 <button onclick="closeCatalog()">Cerrar</button>
+
 </div>
+</div>
+
+<!-- CARRITO -->
+<div class="popup" id="cartPopup">
+<div class="popup-content">
+
+<h3>🛒 Carrito</h3>
+
+<div id="cartItems"></div>
+
+<p>Total: $<span id="total">0</span></p>
+
+<input type="text" id="coupon" placeholder="Cupón">
+<button onclick="applyCoupon()">Aplicar</button>
+
+<br><br>
+<button onclick="closeCart()">Cerrar</button>
 
 </div>
 </div>
 
 <script>
 
-function crearEstrellas(){
-const contenedor=document.getElementById("stars");
-contenedor.innerHTML="";
-for(let i=0;i<80;i++){
-let estrella=document.createElement("div");
-estrella.classList.add("star");
-estrella.style.top=Math.random()*100+"%";
-estrella.style.left=Math.random()*100+"%";
-estrella.style.animationDelay=Math.random()*2+"s";
-contenedor.appendChild(estrella);
-}
-}
-
-function temaOscuro(){
-document.body.classList.toggle("dark-mode");
-if(document.body.classList.contains("dark-mode")){
-crearEstrellas();
-}
-}
-
-function openPopup(){
-document.getElementById('popup').style.display='flex'
-document.getElementById('date').value=new Date().toLocaleDateString()
-}
-
-function closePopup(){
-document.getElementById('popup').style.display='none'
-}
-
-function openPayment(){
-document.getElementById('paymentPopup').style.display='flex'
-}
-
-function closePayment(){
-document.getElementById('paymentPopup').style.display='none'
-}
+let cart=[]
+let total=0
+let discount=0
 
 function openCatalog(){
-document.getElementById('catalogPopup').style.display='flex'
+document.getElementById("catalogPopup").style.display="flex"
 }
 
 function closeCatalog(){
-document.getElementById('catalogPopup').style.display='none'
+document.getElementById("catalogPopup").style.display="none"
 }
 
-document.getElementById('contactForm').addEventListener('submit',function(e){
-e.preventDefault()
-alert('Mensaje guardado localmente ✨')
-this.reset()
-closePopup()
-})
-
-document.getElementById('paymentForm').addEventListener('submit',function(e){
-
-e.preventDefault()
-
-const name=document.getElementById('fullName').value
-const id=document.getElementById('idNumber').value
-const email=document.getElementById('payEmail').value
-const item=document.getElementById('itemType').value
-const method=document.getElementById('paymentMethod').value
-const amount=document.getElementById('amount').value
-
-if(!name||!id||!email||!item||!method||!amount){
-alert("Debe completar todos los campos ✨")
-return
+function openCart(){
+document.getElementById("cartPopup").style.display="flex"
+updateCart()
 }
 
-const now=new Date()
-const date=now.toLocaleDateString()
-const time=now.toLocaleTimeString()
+function closeCart(){
+document.getElementById("cartPopup").style.display="none"
+}
 
-const invoice=`
-FACTURA OFICIAL
-Empresa: El Caldero Mágico
-Fecha: ${date}
-Hora: ${time}
+function addToCart(name,price,btn){
+cart.push({name,price})
+updateCart()
+updateCounter()
+animarVuelo(btn)
 
-Cliente: ${name}
-ID: ${id}
-Correo: ${email}
+alert(name+" agregado ✨")
+}
 
-Artículo: ${item}
-Medio de Pago: ${method}
-Monto: $${amount}
+function updateCounter(){
+document.getElementById("cartCount").innerText=cart.length
+}
 
-Garantía: 30 días
-Gracias por su compra ✨
+function updateCart(){
+const container=document.getElementById("cartItems")
+container.innerHTML=""
+
+total=0
+
+cart.forEach((item,index)=>{
+total+=item.price
+
+const div=document.createElement("div")
+div.innerHTML=`
+${item.name} - $${item.price}
+<button onclick="removeItem(${index})">❌</button>
 `
-
-const blob=new Blob([invoice],{type:"text/plain"})
-const link=document.createElement("a")
-link.href=URL.createObjectURL(blob)
-link.download="Factura_El_Caldero_Magico.txt"
-link.click()
-
-alert("Compra realizada con éxito ✨ Factura generada.")
-
-this.reset()
-closePayment()
-
+container.appendChild(div)
 })
+
+let finalTotal=total-(total*discount)
+document.getElementById("total").innerText=finalTotal.toFixed(2)
+}
+
+function removeItem(index){
+cart.splice(index,1)
+updateCart()
+updateCounter()
+}
+
+function applyCoupon(){
+const code=document.getElementById("coupon").value
+
+if(code==="MAGIA10"){
+discount=0.10
+alert("Cupón aplicado ✨")
+lanzarConfetti()
+}else{
+discount=0
+alert("Cupón inválido")
+}
+
+updateCart()
+}
+
+/* CONFETTI */
+function lanzarConfetti(){
+for(let i=0;i<60;i++){
+let confetti=document.createElement("div")
+confetti.classList.add("confetti")
+
+confetti.style.left=Math.random()*100+"%"
+confetti.style.background=`hsl(${Math.random()*360},100%,60%)`
+confetti.style.animationDuration=(Math.random()*2+1)+"s"
+
+document.body.appendChild(confetti)
+
+setTimeout(()=>{confetti.remove()},2000)
+}
+}
+
+/* ANIMACIÓN VUELO */
+function animarVuelo(btn){
+const rect=btn.getBoundingClientRect()
+const cartBtn=document.getElementById("cartBtn").getBoundingClientRect()
+
+const dot=document.createElement("div")
+dot.classList.add("fly")
+
+dot.style.left=rect.left+"px"
+dot.style.top=rect.top+"px"
+
+document.body.appendChild(dot)
+
+setTimeout(()=>{
+dot.style.left=cartBtn.left+"px"
+dot.style.top=cartBtn.top+"px"
+dot.style.opacity=0
+},50)
+
+setTimeout(()=>{dot.remove()},800)
+}
 
 </script>
 
