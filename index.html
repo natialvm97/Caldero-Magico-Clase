@@ -20,7 +20,6 @@ justify-content:center;
 transition:0.5s;
 }
 
-/* BOTONES SUPERIORES */
 .moon-btn{
 position:fixed;
 top:20px;
@@ -34,9 +33,9 @@ height:50px;
 cursor:pointer;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
-font-family:'Playfair Display',serif;
 }
 
+/* 🛒 NUEVO */
 .cart-btn{
 position:fixed;
 top:20px;
@@ -53,7 +52,6 @@ z-index:1000;
 font-family:'Playfair Display',serif;
 }
 
-/* RESTO ORIGINAL */
 .hero{
 background-color:rgba(255,255,255,0.88);
 padding:60px 80px;
@@ -61,17 +59,28 @@ border-radius:24px;
 text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.12);
 max-width:900px;
+transition:0.5s;
 }
 
 .hero h1{
 font-family:'Great Vibes',cursive;
 font-size:64px;
 color:#b85c7a;
+margin-bottom:10px;
 }
 
 .hero h2{
 font-size:24px;
+font-style:italic;
 color:#6fa58c;
+margin-bottom:30px;
+}
+
+.hero p{
+font-size:18px;
+color:#555;
+margin-bottom:40px;
+line-height:1.6;
 }
 
 .gallery{
@@ -86,6 +95,7 @@ width:100%;
 height:220px;
 object-fit:cover;
 border-radius:16px;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
 
 .buttons{
@@ -104,6 +114,12 @@ font-size:18px;
 border-radius:30px;
 cursor:pointer;
 font-family:'Playfair Display',serif;
+transition:all .3s ease;
+}
+
+button:hover{
+background-color:#f7c6d9;
+color:#9c4f6a;
 }
 
 .banner{
@@ -112,6 +128,7 @@ max-width:1100px;
 display:block;
 margin:40px auto;
 border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .popup{
@@ -132,12 +149,43 @@ padding:30px;
 border-radius:20px;
 width:100%;
 max-width:400px;
+text-align:left;
+}
+
+.popup-content h3{
+text-align:center;
+color:#b85c7a;
+margin-bottom:20px;
+}
+
+.popup-content label{
+display:block;
+margin-top:10px;
+font-size:14px;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:10px;
+border:1px solid #ccc;
+font-family:inherit;
+}
+
+.popup-actions{
+display:flex;
+justify-content:space-between;
+margin-top:20px;
 }
 
 .catalog-grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:10px;
+margin-bottom:20px;
 }
 
 .catalog-grid img{
@@ -148,7 +196,12 @@ border-radius:10px;
 cursor:pointer;
 }
 
-/* CARRITO */
+.catalog-section h4{
+margin-top:20px;
+color:#6fa58c;
+}
+
+/* 🛒 */
 .cart-item{
 display:flex;
 justify-content:space-between;
@@ -160,7 +213,6 @@ font-weight:bold;
 margin-top:10px;
 }
 
-/* DARK MODE */
 .dark-mode{
 background:linear-gradient(135deg,#2b0036,#3d0052);
 color:white;
@@ -170,10 +222,48 @@ color:white;
 background:rgba(60,0,80,0.85);
 }
 
+.dark-mode button{
+background:#5e2a84;
+color:white;
+}
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+overflow:hidden;
+display:none;
+}
+
+.dark-mode .stars{
+display:block;
+}
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0;
+animation:twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="stars" id="stars"></div>
 
 <button class="moon-btn" onclick="temaOscuro()">🌙</button>
 <button class="cart-btn" onclick="openCart()">🛒</button>
@@ -211,7 +301,6 @@ y un brillo que transforma tu espacio en un refugio mágico.
 <!-- 🛒 CARRITO -->
 <div class="popup" id="cartPopup">
 <div class="popup-content">
-
 <h3>Carrito de compras 🛒</h3>
 
 <div id="cartItems"></div>
@@ -228,17 +317,78 @@ Total: $<span id="cartTotal">0</span>
 <div class="popup-actions">
 <button onclick="closeCart()">Cerrar</button>
 </div>
-
 </div>
 </div>
 
-<!-- 📦 CATALOGO COMPLETO -->
+<!-- CONTACTO ORIGINAL -->
+<div class="popup" id="popup">
+<div class="popup-content">
+<h3>Contacto mágico ✨</h3>
+
+<form id="contactForm">
+<label>Fecha</label>
+<input type="text" id="date" readonly>
+
+<label>Correo electrónico</label>
+<input type="email" id="email" required>
+
+<label>Mensaje</label>
+<textarea id="message" required></textarea>
+
+<div class="popup-actions">
+<button type="submit">Enviar</button>
+<button type="button" onclick="closePopup()">Cerrar</button>
+</div>
+</form>
+</div>
+</div>
+
+<!-- PAGOS ORIGINAL -->
+<div class="popup" id="paymentPopup">
+<div class="popup-content">
+<h3>Pago Seguro ✨</h3>
+
+<form id="paymentForm">
+
+<label>Nombre completo</label>
+<input type="text" id="fullName" required>
+
+<label>Cédula / ID</label>
+<input type="text" id="idNumber" required>
+
+<label>Correo electrónico</label>
+<input type="email" id="payEmail" required>
+
+<label>Tipo de artículo</label>
+<input type="text" id="itemType" required>
+
+<label>Método de pago</label>
+<select id="paymentMethod" required>
+<option value="">Seleccione</option>
+<option>Tarjeta</option>
+<option>Sinpe</option>
+<option>Transferencia</option>
+</select>
+
+<label>Monto ($)</label>
+<input type="number" id="amount" required>
+
+<div class="popup-actions">
+<button type="submit">Confirmar Compra</button>
+<button type="button" onclick="closePayment()">Cerrar</button>
+</div>
+
+</form>
+</div>
+</div>
+
+<!-- CATALOGO ORIGINAL + CLICK -->
 <div class="popup" id="catalogPopup">
 <div class="popup-content" style="max-width:900px">
 
 <h3>Catálogo de Candelas ✨</h3>
 
-<!-- VIDRIO -->
+<div class="catalog-section">
 <h4>Velas en recipientes de vidrio</h4>
 <div class="catalog-grid">
 <img src="Vidrio.png" onclick="agregarAlCarrito('Vidrio',10)">
@@ -247,8 +397,9 @@ Total: $<span id="cartTotal">0</span>
 <img src="Vidrio 4.png" onclick="agregarAlCarrito('Vidrio',10)">
 <img src="Vidrio 5.png" onclick="agregarAlCarrito('Vidrio',10)">
 </div>
+</div>
 
-<!-- ARENA -->
+<div class="catalog-section">
 <h4>Velas de arena</h4>
 <div class="catalog-grid">
 <img src="Arena.png" onclick="agregarAlCarrito('Arena',8)">
@@ -257,8 +408,9 @@ Total: $<span id="cartTotal">0</span>
 <img src="Arena 4.png" onclick="agregarAlCarrito('Arena',8)">
 <img src="Arena 5.png" onclick="agregarAlCarrito('Arena',8)">
 </div>
+</div>
 
-<!-- LARGAS -->
+<div class="catalog-section">
 <h4>Velas largas</h4>
 <div class="catalog-grid">
 <img src="Larga.png" onclick="agregarAlCarrito('Larga',12)">
@@ -267,8 +419,9 @@ Total: $<span id="cartTotal">0</span>
 <img src="Larga 4.png" onclick="agregarAlCarrito('Larga',12)">
 <img src="Larga 5.png" onclick="agregarAlCarrito('Larga',12)">
 </div>
+</div>
 
-<!-- DECORATIVAS -->
+<div class="catalog-section">
 <h4>Velas decorativas</h4>
 <div class="catalog-grid">
 <img src="Decorativa 1.png" onclick="agregarAlCarrito('Decorativa',15)">
@@ -277,21 +430,65 @@ Total: $<span id="cartTotal">0</span>
 <img src="Decorativa 4.png" onclick="agregarAlCarrito('Decorativa',15)">
 <img src="Decorativa 5.png" onclick="agregarAlCarrito('Decorativa',15)">
 </div>
+</div>
 
-<br>
+<div class="popup-actions">
 <button onclick="closeCatalog()">Cerrar</button>
+</div>
 
 </div>
 </div>
 
 <script>
 
-/* DARK MODE */
-function temaOscuro(){
-document.body.classList.toggle("dark-mode")
+/* ⭐ ESTRELLAS */
+function crearEstrellas(){
+const contenedor=document.getElementById("stars");
+contenedor.innerHTML="";
+for(let i=0;i<80;i++){
+let estrella=document.createElement("div");
+estrella.classList.add("star");
+estrella.style.top=Math.random()*100+"%";
+estrella.style.left=Math.random()*100+"%";
+estrella.style.animationDelay=Math.random()*2+"s";
+contenedor.appendChild(estrella);
+}
 }
 
-/* CARRITO */
+function temaOscuro(){
+document.body.classList.toggle("dark-mode");
+if(document.body.classList.contains("dark-mode")){
+crearEstrellas();
+}
+}
+
+/* POPUPS ORIGINALES */
+function openPopup(){
+document.getElementById('popup').style.display='flex'
+document.getElementById('date').value=new Date().toLocaleDateString()
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none'
+}
+
+function openPayment(){
+document.getElementById('paymentPopup').style.display='flex'
+}
+
+function closePayment(){
+document.getElementById('paymentPopup').style.display='none'
+}
+
+function openCatalog(){
+document.getElementById('catalogPopup').style.display='flex'
+}
+
+function closeCatalog(){
+document.getElementById('catalogPopup').style.display='none'
+}
+
+/* 🛒 CARRITO */
 let carrito=[]
 let descuento=0
 
@@ -333,8 +530,64 @@ renderCarrito()
 function openCart(){document.getElementById("cartPopup").style.display="flex"}
 function closeCart(){document.getElementById("cartPopup").style.display="none"}
 
-function openCatalog(){document.getElementById("catalogPopup").style.display="flex"}
-function closeCatalog(){document.getElementById("catalogPopup").style.display="none"}
+/* FORMULARIOS ORIGINALES */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+e.preventDefault()
+alert('Mensaje guardado localmente ✨')
+this.reset()
+closePopup()
+})
+
+document.getElementById('paymentForm').addEventListener('submit',function(e){
+
+e.preventDefault()
+
+const name=document.getElementById('fullName').value
+const id=document.getElementById('idNumber').value
+const email=document.getElementById('payEmail').value
+const item=document.getElementById('itemType').value
+const method=document.getElementById('paymentMethod').value
+const amount=document.getElementById('amount').value
+
+if(!name||!id||!email||!item||!method||!amount){
+alert("Debe completar todos los campos ✨")
+return
+}
+
+const now=new Date()
+const date=now.toLocaleDateString()
+const time=now.toLocaleTimeString()
+
+const invoice=`
+FACTURA OFICIAL
+Empresa: El Caldero Mágico
+Fecha: ${date}
+Hora: ${time}
+
+Cliente: ${name}
+ID: ${id}
+Correo: ${email}
+
+Artículo: ${item}
+Medio de Pago: ${method}
+Monto: $${amount}
+
+Garantía: 30 días
+Gracias por su compra ✨
+`
+
+const blob=new Blob([invoice],{type:"text/plain"})
+const link=document.createElement("a")
+link.href=URL.createObjectURL(blob)
+link.download="Factura_El_Caldero_Magico.txt"
+link.click()
+
+alert("Compra realizada con éxito ✨ Factura generada.")
+
+this.reset()
+closePayment()
+
+})
 
 </script>
 
