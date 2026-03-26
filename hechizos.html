@@ -1,68 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Catálogo | El Caldero Mágico</title>
 
+<!-- ⚠️ NO tocamos body ni colores -->
 <style>
 
-body{
-font-family: Arial, sans-serif;
-background:#f4f4f4;
-margin:0;
-}
-
-h1{
-text-align:center;
-margin:30px;
-}
-
-/* ===== FILTROS ===== */
+/* ===== FILTROS (NO CAMBIA TEMA) ===== */
 
 .filtros{
 display:flex;
 justify-content:center;
 gap:15px;
+margin:25px 0;
 flex-wrap:wrap;
-margin-bottom:30px;
 }
 
 .filtros input,
 .filtros select{
 padding:10px;
 border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
+border:1px solid rgba(255,255,255,0.2);
+background:inherit;
+color:inherit;
+font-family:inherit;
 }
 
-/* ===== GRID ===== */
+/* ===== GRID CATÁLOGO (solo ordena) ===== */
 
 .catalogo{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 padding:20px;
-max-width:1100px;
-margin:auto;
 }
 
-/* ===== PRODUCTO ===== */
-
-.producto{
-background:white;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-padding:15px;
-text-align:center;
-transition:.3s;
-}
-
-.producto:hover{
-transform:scale(1.05);
-}
-
+/* mantiene tus tarjetas */
 .producto img{
 width:100%;
 aspect-ratio:1/1;
@@ -70,30 +47,25 @@ object-fit:cover;
 border-radius:10px;
 }
 
-.precio{
-font-weight:bold;
-margin:10px 0;
-}
-
 </style>
 </head>
 
 <body>
 
-<h1>✨ Catálogo de Velas ✨</h1>
+<h1 style="text-align:center;">✨ Catálogo de Velas ✨</h1>
 
-<!-- ===== FILTROS ===== -->
+<!-- ================= FILTROS ================= -->
 
 <div class="filtros">
 
-<input type="text" id="buscador" placeholder="Buscar producto...">
+<input type="text" id="buscador" placeholder="Buscar vela...">
 
 <select id="filtroCategoria">
 <option value="todos">Todas las categorías</option>
-<option value="vidrio">Velas en Vidrio</option>
-<option value="arena">Velas de Arena</option>
-<option value="largas">Velas Largas</option>
-<option value="decorativas">Velas Decorativas</option>
+<option value="vidrio">Velas en recipientes de vidrio</option>
+<option value="arena">Velas de arena</option>
+<option value="largas">Velas largas</option>
+<option value="decorativas">Velas decorativas</option>
 </select>
 
 <select id="filtroPrecio">
@@ -105,103 +77,104 @@ margin:10px 0;
 
 </div>
 
-<!-- ===== CATÁLOGO ===== -->
+<!-- ================= CATÁLOGO ================= -->
 
 <div class="catalogo">
 
-<!-- VIDRIO -->
-<div class="producto" data-nombre="Vela Lavanda" data-categoria="vidrio" data-precio="20">
-<img src="https://picsum.photos/300?1">
-<h3>Vela Lavanda</h3>
-<p class="precio">$20</p>
-</div>
+<!-- 🔥 SOLO CAMBIAMOS ESTO: agregamos data-* -->
 
-<div class="producto" data-nombre="Vela Vainilla" data-categoria="vidrio" data-precio="20">
-<img src="https://picsum.photos/300?2">
-<h3>Vela Vainilla</h3>
-<p class="precio">$20</p>
-</div>
+<!-- Velas en recipiente de vidrio -->
+<div class="producto"
+data-nombre="Vela en recipiente de vidrio"
+data-categoria="vidrio"
+data-precio="20">
 
-<!-- ARENA -->
-<div class="producto" data-nombre="Vela Arena Zen" data-categoria="arena" data-precio="25">
-<img src="https://picsum.photos/300?3">
-<h3>Vela Arena Zen</h3>
-<p class="precio">$25</p>
-</div>
-
-<div class="producto" data-nombre="Vela Arena Floral" data-categoria="arena" data-precio="25">
-<img src="https://picsum.photos/300?4">
-<h3>Vela Arena Floral</h3>
-<p class="precio">$25</p>
-</div>
-
-<!-- LARGAS -->
-<div class="producto" data-nombre="Vela Larga Blanca" data-categoria="largas" data-precio="15">
-<img src="https://picsum.photos/300?5">
-<h3>Vela Larga Blanca</h3>
-<p class="precio">$15</p>
-</div>
-
-<div class="producto" data-nombre="Vela Larga Roja" data-categoria="largas" data-precio="15">
-<img src="https://picsum.photos/300?6">
-<h3>Vela Larga Roja</h3>
-<p class="precio">$15</p>
-</div>
-
-<!-- DECORATIVAS -->
-<div class="producto" data-nombre="Vela Luna" data-categoria="decorativas" data-precio="30">
-<img src="https://picsum.photos/300?7">
-<h3>Vela Luna</h3>
-<p class="precio">$30</p>
-</div>
-
-<div class="producto" data-nombre="Vela Dragón" data-categoria="decorativas" data-precio="30">
-<img src="https://picsum.photos/300?8">
-<h3>Vela Dragón</h3>
-<p class="precio">$30</p>
-</div>
+<img src="imagenes/vidrio1.jpg">
+<h3>Vela en recipiente de vidrio</h3>
+<p>$20</p>
 
 </div>
 
-<!-- ===== JAVASCRIPT FILTRO DINÁMICO ===== -->
+<!-- Velas de arena -->
+<div class="producto"
+data-nombre="Vela de arena"
+data-categoria="arena"
+data-precio="25">
+
+<img src="imagenes/arena1.jpg">
+<h3>Vela de arena</h3>
+<p>$25</p>
+
+</div>
+
+<!-- Velas largas -->
+<div class="producto"
+data-nombre="Vela larga"
+data-categoria="largas"
+data-precio="15">
+
+<img src="imagenes/larga1.jpg">
+<h3>Vela larga</h3>
+<p>$15</p>
+
+</div>
+
+<!-- Velas decorativas -->
+<div class="producto"
+data-nombre="Vela decorativa"
+data-categoria="decorativas"
+data-precio="30">
+
+<img src="imagenes/decorativa1.jpg">
+<h3>Vela decorativa</h3>
+<p>$30</p>
+
+</div>
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
-const buscador = document.getElementById("buscador");
-const filtroCategoria = document.getElementById("filtroCategoria");
-const filtroPrecio = document.getElementById("filtroPrecio");
+const buscador=document.getElementById("buscador");
+const filtroCategoria=document.getElementById("filtroCategoria");
+const filtroPrecio=document.getElementById("filtroPrecio");
 
-const productos = document.querySelectorAll(".producto");
+const productos=document.querySelectorAll(".producto");
 
 function filtrarProductos(){
 
-const texto = buscador.value.toLowerCase();
-const categoria = filtroCategoria.value;
-const precio = filtroPrecio.value;
+const texto=buscador.value.toLowerCase();
+const categoria=filtroCategoria.value;
+const precio=filtroPrecio.value;
 
 productos.forEach(producto=>{
 
-const nombre = producto.dataset.nombre.toLowerCase();
-const categoriaProducto = producto.dataset.categoria;
-const precioProducto = parseFloat(producto.dataset.precio);
+const nombre=producto.dataset.nombre.toLowerCase();
+const categoriaProducto=producto.dataset.categoria;
+const precioProducto=parseFloat(producto.dataset.precio);
 
-const coincideTexto = nombre.includes(texto);
-const coincideCategoria = categoria === "todos" || categoria === categoriaProducto;
-const coincidePrecio = precio === "todos" || precioProducto <= precio;
+const textoOK=nombre.includes(texto);
 
-if(coincideTexto && coincideCategoria && coincidePrecio){
-producto.style.display="block";
-}else{
-producto.style.display="none";
-}
+const categoriaOK=
+categoria==="todos"||
+categoriaProducto===categoria;
+
+const precioOK=
+precio==="todos"||
+precioProducto<=precio;
+
+producto.style.display=
+(textoOK&&categoriaOK&&precioOK)?"":"none";
 
 });
 
 }
 
-buscador.addEventListener("input", filtrarProductos);
-filtroCategoria.addEventListener("change", filtrarProductos);
-filtroPrecio.addEventListener("change", filtrarProductos);
+buscador.addEventListener("input",filtrarProductos);
+filtroCategoria.addEventListener("change",filtrarProductos);
+filtroPrecio.addEventListener("change",filtrarProductos);
 
 </script>
 
