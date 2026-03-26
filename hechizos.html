@@ -142,11 +142,6 @@ margin-top:10px;
 
 <h1>✨ Catálogo Mágico de Velas ✨</h1>
 
-<!-- 7 -->
-<div class="card">
-<h3>7️⃣ Cambiar Tema</h3>
-<button onclick="temaOscuro()">Activar / Desactivar Modo Oscuro</button>
-</div>
 <div class="catalog-section">
 <h4>Velas en recipientes de vidrio</h4>
 <div class="catalog-grid">
@@ -213,98 +208,6 @@ function crearEstrellas(){
         estrella.style.animationDelay=Math.random()*2+"s";
         contenedor.appendChild(estrella);
     }
-}
-
-/* 1 */
-function registrar(){
-let nombre=document.getElementById("nombre").value;
-if(nombre===""){
-alert("Debe ingresar nombre");
-}else{
-document.getElementById("res1").textContent="Estudiante "+nombre+" registrado.";
-}
-}
-
-/* 2 */
-function promedio(){
-let a=parseFloat(document.getElementById("n1").value);
-let b=parseFloat(document.getElementById("n2").value);
-let c=parseFloat(document.getElementById("n3").value);
-if(isNaN(a)||isNaN(b)||isNaN(c)){
-alert("Ingrese las tres notas");
-return;
-}
-let prom=(a+b+c)/3;
-document.getElementById("res2").textContent="Promedio: "+prom.toFixed(2);
-}
-
-/* 3 */
-function activar(){
-let est=document.getElementById("estado");
-est.textContent="Estado: Activo";
-est.style.color="lightgreen";
-}
-
-/* 4 */
-function listarCursos(){
-let cursos=["Contabilidad","Finanzas","Economía","Auditoría"];
-let ul=document.getElementById("lista");
-ul.innerHTML="";
-cursos.forEach(function(c){
-let li=document.createElement("li");
-li.textContent=c;
-ul.appendChild(li);
-});
-}
-
-/* 5 */
-function duplicar(){
-let notas=[60,70,80];
-let nuevas=notas.map(n=>n*2);
-document.getElementById("res5").textContent="Notas duplicadas: "+nuevas;
-}
-
-/* 6 */
-document.getElementById("eventoBtn").addEventListener("click",function(){
-alert("Matrícula confirmada correctamente");
-});
-
-/* 7 */
-function temaOscuro(){
-document.body.classList.toggle("dark-mode");
-if(document.body.classList.contains("dark-mode")){
-crearEstrellas();
-}
-}
-
-/* 8 */
-function validarEdad(){
-let edad=parseInt(document.getElementById("edad").value);
-if(isNaN(edad)){
-alert("Ingrese edad");
-return;
-}
-if(edad>=18){
-document.getElementById("res8").textContent="Mayor de edad";
-}else{
-document.getElementById("res8").textContent="Menor de edad";
-}
-}
-
-/* 9 */
-let contador=0;
-let intervalo;
-function iniciarContador(){
-if(intervalo) return;
-intervalo=setInterval(function(){
-contador++;
-document.getElementById("contador").textContent=contador;
-},1000);
-}
-
-/* 10 */
-function limpiar(){
-location.reload();
 }
 
 </script>
