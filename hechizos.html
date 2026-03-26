@@ -28,34 +28,44 @@ h1{
 
 /* ✅ SECCION */
 .catalog-section{
-    margin-bottom:40px;
+    margin-bottom:50px;
 }
 
 .catalog-section h4{
     color:#6fa58c;
-    margin-bottom:15px;
+    margin-bottom:20px;
+    font-size:22px;
 }
 
-/* ✅ GRID DE CATALOGO */
+/* ✅ GRID CATALOGO */
 .catalog-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:25px;
 }
 
-/* ✅ TARJETA DE PRODUCTO */
-.catalog-grid img{
+/* ✅ TARJETA PRODUCTO */
+.catalog-item{
     width:100%;
-    aspect-ratio:1/1;   /* 🔥 Hace las imágenes cuadradas */
-    object-fit:cover;
+    aspect-ratio:1/1;
+    overflow:hidden;
     border-radius:15px;
+    background:white;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
     cursor:pointer;
     transition:0.3s;
-    box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
-.catalog-grid img:hover{
+.catalog-item:hover{
     transform:scale(1.05);
+}
+
+/* ✅ IMAGEN CUADRADA */
+.catalog-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 /* 🛒 */
@@ -122,51 +132,64 @@ margin-top:10px;
 
 <h1>✨ Catálogo Mágico de Velas ✨</h1>
 
+<!-- 🔮 VIDRIO -->
 <div class="catalog-section">
 <h4>Velas en recipientes de vidrio</h4>
+
 <div class="catalog-grid">
-<img src="Vidrio.png" onclick="agregarAlCarrito('Vidrio',10)">
-<img src="Vidrio 2.png" onclick="agregarAlCarrito('Vidrio',10)">
-<img src="Vidrio 3.png" onclick="agregarAlCarrito('Vidrio',10)">
-<img src="Vidrio 4.png" onclick="agregarAlCarrito('Vidrio',10)">
-<img src="Vidrio 5.png" onclick="agregarAlCarrito('Vidrio',10)">
+<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 2.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 3.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 4.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 5.png"></div>
 </div>
 </div>
 
+<!-- 🏖 ARENA -->
 <div class="catalog-section">
 <h4>Velas de arena</h4>
+
 <div class="catalog-grid">
-<img src="Arena.png" onclick="agregarAlCarrito('Arena',8)">
-<img src="Arena 2.png" onclick="agregarAlCarrito('Arena',8)">
-<img src="Arena 3.png" onclick="agregarAlCarrito('Arena',8)">
-<img src="Arena 4.png" onclick="agregarAlCarrito('Arena',8)">
-<img src="Arena 5.png" onclick="agregarAlCarrito('Arena',8)">
+<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 2.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 3.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 4.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 5.png"></div>
 </div>
 </div>
 
+<!-- 🕯 LARGAS -->
 <div class="catalog-section">
 <h4>Velas largas</h4>
+
 <div class="catalog-grid">
-<img src="Larga.png" onclick="agregarAlCarrito('Larga',12)">
-<img src="Larga 2.png" onclick="agregarAlCarrito('Larga',12)">
-<img src="Larga 3.png" onclick="agregarAlCarrito('Larga',12)">
-<img src="Larga 4.png" onclick="agregarAlCarrito('Larga',12)">
-<img src="Larga 5.png" onclick="agregarAlCarrito('Larga',12)">
+<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 2.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 3.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 4.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 5.png"></div>
 </div>
 </div>
 
+<!-- ✨ DECORATIVAS -->
 <div class="catalog-section">
 <h4>Velas decorativas</h4>
+
 <div class="catalog-grid">
-<img src="Decorativa 1.png" onclick="agregarAlCarrito('Decorativa',15)">
-<img src="Decorativa 2.png" onclick="agregarAlCarrito('Decorativa',15)">
-<img src="Decorativa 3.png" onclick="agregarAlCarrito('Decorativa',15)">
-<img src="Decorativa 4.png" onclick="agregarAlCarrito('Decorativa',15)">
-<img src="Decorativa 5.png" onclick="agregarAlCarrito('Decorativa',15)">
+<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 1.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 2.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 3.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 4.png"></div>
+<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 5.png"></div>
 </div>
 </div>
 
 <script>
+
+/* 🛒 SIMULACION CARRITO */
+function agregarAlCarrito(nombre,precio){
+    alert(nombre+" agregado al carrito 🛒");
+}
 
 /* ✨ ESTRELLAS */
 function crearEstrellas(){
@@ -181,6 +204,8 @@ function crearEstrellas(){
         contenedor.appendChild(estrella);
     }
 }
+
+crearEstrellas();
 
 </script>
 
