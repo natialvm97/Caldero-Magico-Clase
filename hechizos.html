@@ -17,7 +17,6 @@ body{
     transition:0.5s;
 }
 
-/* ✅ TITULO */
 h1{
     text-align:center;
     color:#b85c7a;
@@ -26,7 +25,6 @@ h1{
     margin-bottom:40px;
 }
 
-/* ✅ SECCION */
 .catalog-section{
     margin-bottom:50px;
 }
@@ -37,22 +35,21 @@ h1{
     font-size:22px;
 }
 
-/* ✅ GRID CATALOGO */
+/* GRID */
 .catalog-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:25px;
 }
 
-/* ✅ TARJETA PRODUCTO */
+/* TARJETA */
 .catalog-item{
-    width:100%;
-    aspect-ratio:1/1;
-    overflow:hidden;
-    border-radius:15px;
     background:white;
+    border-radius:15px;
     box-shadow:0 6px 15px rgba(0,0,0,0.15);
-    cursor:pointer;
+    overflow:hidden;
+    text-align:center;
+    padding-bottom:15px;
     transition:0.3s;
 }
 
@@ -60,15 +57,38 @@ h1{
     transform:scale(1.05);
 }
 
-/* ✅ IMAGEN CUADRADA */
+/* IMAGEN CUADRADA */
 .catalog-item img{
     width:100%;
-    height:100%;
+    aspect-ratio:1/1;
     object-fit:cover;
-    display:block;
 }
 
-/* 🛒 */
+/* PRECIO */
+.price{
+    font-weight:bold;
+    color:#b85c7a;
+    margin:10px 0;
+    font-size:18px;
+}
+
+/* BOTON */
+.add-btn{
+    background:#6fa58c;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.add-btn:hover{
+    background:#4f8b74;
+}
+
+/* CARRITO */
 .cart-item{
 display:flex;
 justify-content:space-between;
@@ -80,14 +100,9 @@ font-weight:bold;
 margin-top:10px;
 }
 
-/* 🌙 MODO OSCURO */
+/* 🌙 DARK MODE */
 .dark-mode{
     background:linear-gradient(135deg,#2b0036,#3d0052);
-    color:white;
-}
-
-.dark-mode button{
-    background:#5e2a84;
     color:white;
 }
 
@@ -118,9 +133,9 @@ margin-top:10px;
 }
 
 @keyframes twinkle{
-    0%{opacity:0;}
-    50%{opacity:1;}
-    100%{opacity:0;}
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
 }
 
 </style>
@@ -132,77 +147,180 @@ margin-top:10px;
 
 <h1>✨ Catálogo Mágico de Velas ✨</h1>
 
-<!-- 🔮 VIDRIO -->
+<!-- VIDRIO -->
 <div class="catalog-section">
 <h4>Velas en recipientes de vidrio</h4>
 
 <div class="catalog-grid">
-<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 2.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 3.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 4.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Vidrio',10)"><img src="Vidrio 5.png"></div>
+
+<div class="catalog-item">
+<img src="Vidrio.png">
+<div class="price">$20</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Vidrio 2.png">
+<div class="price">$20</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Vidrio 3.png">
+<div class="price">$20</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Vidrio 4.png">
+<div class="price">$20</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Vidrio 5.png">
+<div class="price">$20</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+</div>
+
 </div>
 </div>
 
-<!-- 🏖 ARENA -->
+<!-- ARENA -->
 <div class="catalog-section">
 <h4>Velas de arena</h4>
 
 <div class="catalog-grid">
-<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 2.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 3.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 4.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Arena',8)"><img src="Arena 5.png"></div>
+
+<div class="catalog-item">
+<img src="Arena.png">
+<div class="price">$25</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Arena 2.png">
+<div class="price">$25</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Arena 3.png">
+<div class="price">$25</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Arena 4.png">
+<div class="price">$25</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Arena 5.png">
+<div class="price">$25</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+</div>
+
 </div>
 </div>
 
-<!-- 🕯 LARGAS -->
+<!-- LARGAS -->
 <div class="catalog-section">
 <h4>Velas largas</h4>
 
 <div class="catalog-grid">
-<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 2.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 3.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 4.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Larga',12)"><img src="Larga 5.png"></div>
+
+<div class="catalog-item">
+<img src="Larga.png">
+<div class="price">$15</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Larga 2.png">
+<div class="price">$15</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Larga 3.png">
+<div class="price">$15</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Larga 4.png">
+<div class="price">$15</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Larga 5.png">
+<div class="price">$15</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+</div>
+
 </div>
 </div>
 
-<!-- ✨ DECORATIVAS -->
+<!-- DECORATIVAS -->
 <div class="catalog-section">
 <h4>Velas decorativas</h4>
 
 <div class="catalog-grid">
-<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 1.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 2.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 3.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 4.png"></div>
-<div class="catalog-item" onclick="agregarAlCarrito('Decorativa',15)"><img src="Decorativa 5.png"></div>
+
+<div class="catalog-item">
+<img src="Decorativa 1.png">
+<div class="price">$30</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Decorativa 2.png">
+<div class="price">$30</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Decorativa 3.png">
+<div class="price">$30</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Decorativa 4.png">
+<div class="price">$30</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+</div>
+
+<div class="catalog-item">
+<img src="Decorativa 5.png">
+<div class="price">$30</div>
+<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+</div>
+
 </div>
 </div>
 
 <script>
 
-/* 🛒 SIMULACION CARRITO */
 function agregarAlCarrito(nombre,precio){
-    alert(nombre+" agregado al carrito 🛒");
+    alert(nombre+" agregado al carrito 🛒 - $" + precio);
 }
 
-/* ✨ ESTRELLAS */
+/* ESTRELLAS */
 function crearEstrellas(){
-    const contenedor=document.getElementById("stars");
-    contenedor.innerHTML="";
-    for(let i=0;i<80;i++){
-        let estrella=document.createElement("div");
-        estrella.classList.add("star");
-        estrella.style.top=Math.random()*100+"%";
-        estrella.style.left=Math.random()*100+"%";
-        estrella.style.animationDelay=Math.random()*2+"s";
-        contenedor.appendChild(estrella);
-    }
+const contenedor=document.getElementById("stars");
+contenedor.innerHTML="";
+for(let i=0;i<80;i++){
+let estrella=document.createElement("div");
+estrella.classList.add("star");
+estrella.style.top=Math.random()*100+"%";
+estrella.style.left=Math.random()*100+"%";
+estrella.style.animationDelay=Math.random()*2+"s";
+contenedor.appendChild(estrella);
+}
 }
 
 crearEstrellas();
