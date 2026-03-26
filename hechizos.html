@@ -108,79 +108,64 @@ button:hover{
 
 <div class="stars" id="stars"></div>
 
-<h1>✨ Sistema Académico Mágico ✨</h1>
-
-<!-- 1 -->
-<div class="card">
-<h3>1️⃣ Registrar Estudiante</h3>
-<input type="text" id="nombre">
-<button onclick="registrar()">Registrar</button>
-<div id="res1" class="resultado"></div>
-</div>
-
-<!-- 2 -->
-<div class="card">
-<h3>2️⃣ Calcular Promedio</h3>
-<input type="number" id="n1">
-<input type="number" id="n2">
-<input type="number" id="n3">
-<button onclick="promedio()">Calcular</button>
-<div id="res2" class="resultado"></div>
-</div>
-
-<!-- 3 -->
-<div class="card">
-<h3>3️⃣ Activar Estado</h3>
-<p id="estado">Estado: Inactivo</p>
-<button onclick="activar()">Activar</button>
-</div>
-
-<!-- 4 -->
-<div class="card">
-<h3>4️⃣ Listar Cursos</h3>
-<button onclick="listarCursos()">Mostrar Cursos</button>
-<ul id="lista"></ul>
-</div>
-
-<!-- 5 -->
-<div class="card">
-<h3>5️⃣ Duplicar Notas</h3>
-<button onclick="duplicar()">Duplicar</button>
-<div id="res5" class="resultado"></div>
-</div>
-
-<!-- 6 -->
-<div class="card">
-<h3>6️⃣ Evento de Confirmación</h3>
-<button id="eventoBtn">Confirmar Matrícula</button>
-</div>
+<h1>✨ Catálogo Mágico de Velas ✨</h1>
 
 <!-- 7 -->
 <div class="card">
 <h3>7️⃣ Cambiar Tema</h3>
 <button onclick="temaOscuro()">Activar / Desactivar Modo Oscuro</button>
 </div>
-
-<!-- 8 -->
-<div class="card">
-<h3>8️⃣ Validar Edad</h3>
-<input type="number" id="edad">
-<button onclick="validarEdad()">Validar</button>
-<div id="res8" class="resultado"></div>
+<div class="catalog-section">
+<h4>Velas en recipientes de vidrio</h4>
+<div class="catalog-grid">
+<img src="Vidrio.png" onclick="agregarAlCarrito('Vidrio',10)">
+<img src="Vidrio 2.png" onclick="agregarAlCarrito('Vidrio',10)">
+<img src="Vidrio 3.png" onclick="agregarAlCarrito('Vidrio',10)">
+<img src="Vidrio 4.png" onclick="agregarAlCarrito('Vidrio',10)">
+<img src="Vidrio 5.png" onclick="agregarAlCarrito('Vidrio',10)">
+</div>
 </div>
 
-<!-- 9 -->
-<div class="card">
-<h3>9️⃣ Contador Automático</h3>
-<button onclick="iniciarContador()">Iniciar</button>
-<div id="contador">0</div>
+<div class="catalog-section">
+<h4>Velas de arena</h4>
+<div class="catalog-grid">
+<img src="Arena.png" onclick="agregarAlCarrito('Arena',8)">
+<img src="Arena 2.png" onclick="agregarAlCarrito('Arena',8)">
+<img src="Arena 3.png" onclick="agregarAlCarrito('Arena',8)">
+<img src="Arena 4.png" onclick="agregarAlCarrito('Arena',8)">
+<img src="Arena 5.png" onclick="agregarAlCarrito('Arena',8)">
+</div>
 </div>
 
-<!-- 10 -->
-<div class="card">
-<h3>🔟 Limpiar Sistema</h3>
-<button onclick="limpiar()">Limpiar Todo</button>
+<div class="catalog-section">
+<h4>Velas largas</h4>
+<div class="catalog-grid">
+<img src="Larga.png" onclick="agregarAlCarrito('Larga',12)">
+<img src="Larga 2.png" onclick="agregarAlCarrito('Larga',12)">
+<img src="Larga 3.png" onclick="agregarAlCarrito('Larga',12)">
+<img src="Larga 4.png" onclick="agregarAlCarrito('Larga',12)">
+<img src="Larga 5.png" onclick="agregarAlCarrito('Larga',12)">
 </div>
+</div>
+
+<div class="catalog-section">
+<h4>Velas decorativas</h4>
+<div class="catalog-grid">
+<img src="Decorativa 1.png" onclick="agregarAlCarrito('Decorativa',15)">
+<img src="Decorativa 2.png" onclick="agregarAlCarrito('Decorativa',15)">
+<img src="Decorativa 3.png" onclick="agregarAlCarrito('Decorativa',15)">
+<img src="Decorativa 4.png" onclick="agregarAlCarrito('Decorativa',15)">
+<img src="Decorativa 5.png" onclick="agregarAlCarrito('Decorativa',15)">
+</div>
+</div>
+
+<div class="popup-actions">
+<button onclick="closeCatalog()">Cerrar</button>
+</div>
+
+</div>
+</div>
+
 
 <script>
 
