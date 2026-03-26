@@ -211,7 +211,7 @@ y un brillo que transforma tu espacio en un refugio mágico.
 </div>
 
 <div class="buttons">
-<button onclick="openCatalog()">Explorar Hechizos</button>
+<button onclick="window.location.href='hechizos.html'">Explorar hechizos</button>
 <button onclick="openPopup()">Contactar por correo</button>
 <button onclick="openPayment()">Pagos</button>
 </div>
@@ -346,13 +346,6 @@ function closePayment(){
 document.getElementById('paymentPopup').style.display='none'
 }
 
-function openCatalog(){
-document.getElementById('catalogPopup').style.display='flex'
-}
-
-function closeCatalog(){
-document.getElementById('catalogPopup').style.display='none'
-}
 
 /* 🛒 CARRITO */
 let carrito=[]
