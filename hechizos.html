@@ -4,75 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Catálogo | El Caldero Mágico</title>
+<title>Explorar Hechizos | El Caldero Mágico</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-font-family: Arial, sans-serif;
-background:#f4f4f4;
-margin:0;
+    font-family:Poppins;
+    background:#111;
+    color:white;
+    margin:0;
 }
 
-h1{
-text-align:center;
-margin:30px;
+/* ===== CONTROLES ===== */
+
+.controles{
+    text-align:center;
+    padding:20px;
 }
 
-/* ===== FILTROS ===== */
-
-.filtros{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-bottom:30px;
+input,select,button{
+    padding:10px;
+    margin:5px;
+    border-radius:8px;
+    border:none;
 }
 
-.filtros input,
-.filtros select{
-padding:10px;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
+button{
+    cursor:pointer;
 }
 
 /* ===== GRID ===== */
 
 .catalogo{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
-max-width:1100px;
-margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
 }
 
-/* ===== PRODUCTO ===== */
-
 .producto{
-background:white;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-padding:15px;
-text-align:center;
-transition:.3s;
+    background:#1c1c1c;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    transition:0.3s;
 }
 
 .producto:hover{
-transform:scale(1.05);
+    transform:scale(1.03);
 }
 
 .producto img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:10px;
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
 .precio{
-font-weight:bold;
-margin:10px 0;
+    font-size:18px;
+    color:#ffd369;
+    margin:10px 0;
 }
 
 </style>
@@ -80,130 +74,134 @@ margin:10px 0;
 
 <body>
 
-<h1>✨ Catálogo de Velas ✨</h1>
+<h1 style="text-align:center;">Explorar Hechizos</h1>
 
-<!-- ===== FILTROS ===== -->
+<!-- ================= CONTROLES ================= -->
 
-<div class="filtros">
+<div class="controles">
 
 <input type="text" id="buscador" placeholder="Buscar producto...">
 
-<select id="filtroCategoria">
+<select id="categoriaFiltro">
 <option value="todos">Todas las categorías</option>
-<option value="vidrio">Velas en Vidrio</option>
+<option value="vidrio">Velas en Recipiente</option>
 <option value="arena">Velas de Arena</option>
 <option value="largas">Velas Largas</option>
 <option value="decorativas">Velas Decorativas</option>
 </select>
 
-<select id="filtroPrecio">
-<option value="todos">Todos los precios</option>
-<option value="20">Menor o igual a $20</option>
-<option value="25">Menor o igual a $25</option>
-<option value="30">Menor o igual a $30</option>
-</select>
+<br>
+
+<button onclick="filtrarPrecio(20)">Menor a $20</button>
+<button onclick="filtrarPrecio(25)">Menor a $25</button>
+<button onclick="filtrarPrecio(30)">Menor a $30</button>
+<button onclick="filtrarPrecio(999)">Todos</button>
 
 </div>
 
-<!-- ===== CATÁLOGO ===== -->
+<!-- ================= CATALOGO ================= -->
 
-<div class="catalogo">
+<div class="catalogo" id="catalogo">
 
-<!-- VIDRIO -->
-<div class="producto" data-nombre="Vela Lavanda" data-categoria="vidrio" data-precio="20">
-<img src="https://picsum.photos/300?1">
-<h3>Vela Lavanda</h3>
+<!-- 🔥 IMPORTANTE -->
+<!-- USÉ LOS MISMOS NOMBRES DE ARCHIVOS -->
+
+<div class="producto" data-nombre="Vela Luna" data-categoria="vidrio" data-precio="20">
+<img src="vela1.jpg">
+<h3>Vela Luna</h3>
 <p class="precio">$20</p>
 </div>
 
-<div class="producto" data-nombre="Vela Vainilla" data-categoria="vidrio" data-precio="20">
-<img src="https://picsum.photos/300?2">
-<h3>Vela Vainilla</h3>
+<div class="producto" data-nombre="Vela Solar" data-categoria="vidrio" data-precio="20">
+<img src="vela2.jpg">
+<h3>Vela Solar</h3>
 <p class="precio">$20</p>
 </div>
 
-<!-- ARENA -->
-<div class="producto" data-nombre="Vela Arena Zen" data-categoria="arena" data-precio="25">
-<img src="https://picsum.photos/300?3">
-<h3>Vela Arena Zen</h3>
+<div class="producto" data-nombre="Vela Arena Mística" data-categoria="arena" data-precio="25">
+<img src="arena1.jpg">
+<h3>Vela Arena Mística</h3>
 <p class="precio">$25</p>
 </div>
 
-<div class="producto" data-nombre="Vela Arena Floral" data-categoria="arena" data-precio="25">
-<img src="https://picsum.photos/300?4">
-<h3>Vela Arena Floral</h3>
+<div class="producto" data-nombre="Vela Arena Ritual" data-categoria="arena" data-precio="25">
+<img src="arena2.jpg">
+<h3>Vela Arena Ritual</h3>
 <p class="precio">$25</p>
 </div>
 
-<!-- LARGAS -->
 <div class="producto" data-nombre="Vela Larga Blanca" data-categoria="largas" data-precio="15">
-<img src="https://picsum.photos/300?5">
+<img src="larga1.jpg">
 <h3>Vela Larga Blanca</h3>
 <p class="precio">$15</p>
 </div>
 
-<div class="producto" data-nombre="Vela Larga Roja" data-categoria="largas" data-precio="15">
-<img src="https://picsum.photos/300?6">
-<h3>Vela Larga Roja</h3>
+<div class="producto" data-nombre="Vela Larga Negra" data-categoria="largas" data-precio="15">
+<img src="larga2.jpg">
+<h3>Vela Larga Negra</h3>
 <p class="precio">$15</p>
 </div>
 
-<!-- DECORATIVAS -->
-<div class="producto" data-nombre="Vela Luna" data-categoria="decorativas" data-precio="30">
-<img src="https://picsum.photos/300?7">
-<h3>Vela Luna</h3>
+<div class="producto" data-nombre="Vela Decorativa Dragón" data-categoria="decorativas" data-precio="30">
+<img src="decorativa1.jpg">
+<h3>Vela Decorativa Dragón</h3>
 <p class="precio">$30</p>
 </div>
 
-<div class="producto" data-nombre="Vela Dragón" data-categoria="decorativas" data-precio="30">
-<img src="https://picsum.photos/300?8">
-<h3>Vela Dragón</h3>
+<div class="producto" data-nombre="Vela Decorativa Bruja" data-categoria="decorativas" data-precio="30">
+<img src="decorativa2.jpg">
+<h3>Vela Decorativa Bruja</h3>
 <p class="precio">$30</p>
 </div>
 
 </div>
 
-<!-- ===== JAVASCRIPT FILTRADO DINÁMICO ===== -->
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
-const buscador = document.getElementById("buscador");
-const filtroCategoria = document.getElementById("filtroCategoria");
-const filtroPrecio = document.getElementById("filtroPrecio");
+const buscador=document.getElementById("buscador");
+const categoriaFiltro=document.getElementById("categoriaFiltro");
 
-const productos = document.querySelectorAll(".producto");
+let precioMax=999;
 
-function filtrarProductos(){
+buscador.addEventListener("input",filtrar);
+categoriaFiltro.addEventListener("change",filtrar);
 
-const texto = buscador.value.toLowerCase();
-const categoria = filtroCategoria.value;
-const precio = filtroPrecio.value;
-
-productos.forEach(producto=>{
-
-const nombre = producto.dataset.nombre.toLowerCase();
-const categoriaProducto = producto.dataset.categoria;
-const precioProducto = parseFloat(producto.dataset.precio);
-
-const coincideTexto = nombre.includes(texto);
-const coincideCategoria =
-categoria === "todos" || categoriaProducto === categoria;
-const coincidePrecio =
-precio === "todos" || precioProducto <= precio;
-
-if(coincideTexto && coincideCategoria && coincidePrecio){
-producto.style.display = "";
-}else{
-producto.style.display = "none";
+function filtrarPrecio(valor){
+    precioMax=valor;
+    filtrar();
 }
+
+function filtrar(){
+
+const texto=buscador.value.toLowerCase();
+const categoria=categoriaFiltro.value;
+
+document.querySelectorAll(".producto").forEach(producto=>{
+
+const nombre=producto.dataset.nombre.toLowerCase();
+const cat=producto.dataset.categoria;
+const precio=parseFloat(producto.dataset.precio);
+
+let mostrar=true;
+
+/* BUSCADOR */
+if(!nombre.includes(texto)) mostrar=false;
+
+/* CATEGORIA */
+if(categoria!=="todos" && cat!==categoria)
+mostrar=false;
+
+/* PRECIO */
+if(precio>precioMax)
+mostrar=false;
+
+producto.style.display=mostrar?"block":"none";
 
 });
 
 }
-
-buscador.addEventListener("input", filtrarProductos);
-filtroCategoria.addEventListener("change", filtrarProductos);
-filtroPrecio.addEventListener("change", filtrarProductos);
 
 </script>
 
