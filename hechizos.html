@@ -3,139 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explorar Hechizos | El Caldero Mágico</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>Catálogo | El Caldero Mágico</title>
 
 <style>
 
 body{
-    font-family:'Playfair Display', serif;
-    background: linear-gradient(135deg,#f7c6d9,#cde8d6);
-    margin:0;
-    padding:40px;
-    transition:0.5s;
+font-family: Arial, sans-serif;
+background:#f4f4f4;
+margin:0;
 }
 
 h1{
-    text-align:center;
-    color:#b85c7a;
-    font-family:'Great Vibes', cursive;
-    font-size:48px;
-    margin-bottom:40px;
+text-align:center;
+margin:30px;
 }
 
-.catalog-section{
-    margin-bottom:50px;
-}
+/* ===== FILTROS ===== */
 
-.catalog-section h4{
-    color:#6fa58c;
-    margin-bottom:20px;
-    font-size:22px;
-}
-
-/* GRID */
-.catalog-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:25px;
-}
-
-/* TARJETA */
-.catalog-item{
-    background:white;
-    border-radius:15px;
-    box-shadow:0 6px 15px rgba(0,0,0,0.15);
-    overflow:hidden;
-    text-align:center;
-    padding-bottom:15px;
-    transition:0.3s;
-}
-
-.catalog-item:hover{
-    transform:scale(1.05);
-}
-
-/* IMAGEN CUADRADA */
-.catalog-item img{
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-}
-
-/* PRECIO */
-.price{
-    font-weight:bold;
-    color:#b85c7a;
-    margin:10px 0;
-    font-size:18px;
-}
-
-/* BOTON */
-.add-btn{
-    background:#6fa58c;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    transition:0.3s;
-}
-
-.add-btn:hover{
-    background:#4f8b74;
-}
-
-/* CARRITO */
-.cart-item{
+.filtros{
 display:flex;
-justify-content:space-between;
-margin:8px 0;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:30px;
 }
 
-.cart-total{
+.filtros input,
+.filtros select{
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+/* ===== GRID ===== */
+
+.catalogo{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+max-width:1100px;
+margin:auto;
+}
+
+/* ===== PRODUCTO ===== */
+
+.producto{
+background:white;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+padding:15px;
+text-align:center;
+transition:.3s;
+}
+
+.producto:hover{
+transform:scale(1.05);
+}
+
+.producto img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:10px;
+}
+
+.precio{
 font-weight:bold;
-margin-top:10px;
-}
-
-/* 🌙 DARK MODE */
-.dark-mode{
-    background:linear-gradient(135deg,#2b0036,#3d0052);
-    color:white;
-}
-
-/* ✨ ESTRELLAS */
-.stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    pointer-events:none;
-    overflow:hidden;
-    display:none;
-}
-
-.dark-mode .stars{
-    display:block;
-}
-
-.star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
-    border-radius:50%;
-    opacity:0;
-    animation:twinkle 2s infinite ease-in-out;
-}
-
-@keyframes twinkle{
-0%{opacity:0;}
-50%{opacity:1;}
-100%{opacity:0;}
+margin:10px 0;
 }
 
 </style>
@@ -143,187 +80,128 @@ margin-top:10px;
 
 <body>
 
-<div class="stars" id="stars"></div>
+<h1>✨ Catálogo de Velas ✨</h1>
 
-<h1>✨ Catálogo Mágico de Velas ✨</h1>
+<!-- ===== FILTROS ===== -->
+
+<div class="filtros">
+
+<input type="text" id="buscador" placeholder="Buscar producto...">
+
+<select id="filtroCategoria">
+<option value="todos">Todas las categorías</option>
+<option value="vidrio">Velas en Vidrio</option>
+<option value="arena">Velas de Arena</option>
+<option value="largas">Velas Largas</option>
+<option value="decorativas">Velas Decorativas</option>
+</select>
+
+<select id="filtroPrecio">
+<option value="todos">Todos los precios</option>
+<option value="20">Menor o igual a $20</option>
+<option value="25">Menor o igual a $25</option>
+<option value="30">Menor o igual a $30</option>
+</select>
+
+</div>
+
+<!-- ===== CATÁLOGO ===== -->
+
+<div class="catalogo">
 
 <!-- VIDRIO -->
-<div class="catalog-section">
-<h4>Velas en recipientes de vidrio</h4>
-
-<div class="catalog-grid">
-
-<div class="catalog-item">
-<img src="Vidrio.png">
-<div class="price">$20</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
+<div class="producto" data-nombre="Vela Lavanda" data-categoria="vidrio" data-precio="20">
+<img src="https://picsum.photos/300?1">
+<h3>Vela Lavanda</h3>
+<p class="precio">$20</p>
 </div>
 
-<div class="catalog-item">
-<img src="Vidrio 2.png">
-<div class="price">$20</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Vidrio 3.png">
-<div class="price">$20</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Vidrio 4.png">
-<div class="price">$20</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Vidrio 5.png">
-<div class="price">$20</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Vidrio',20)">Agregar al carrito</button>
-</div>
-
-</div>
+<div class="producto" data-nombre="Vela Vainilla" data-categoria="vidrio" data-precio="20">
+<img src="https://picsum.photos/300?2">
+<h3>Vela Vainilla</h3>
+<p class="precio">$20</p>
 </div>
 
 <!-- ARENA -->
-<div class="catalog-section">
-<h4>Velas de arena</h4>
-
-<div class="catalog-grid">
-
-<div class="catalog-item">
-<img src="Arena.png">
-<div class="price">$25</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
+<div class="producto" data-nombre="Vela Arena Zen" data-categoria="arena" data-precio="25">
+<img src="https://picsum.photos/300?3">
+<h3>Vela Arena Zen</h3>
+<p class="precio">$25</p>
 </div>
 
-<div class="catalog-item">
-<img src="Arena 2.png">
-<div class="price">$25</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Arena 3.png">
-<div class="price">$25</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Arena 4.png">
-<div class="price">$25</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Arena 5.png">
-<div class="price">$25</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela de Arena',25)">Agregar al carrito</button>
-</div>
-
-</div>
+<div class="producto" data-nombre="Vela Arena Floral" data-categoria="arena" data-precio="25">
+<img src="https://picsum.photos/300?4">
+<h3>Vela Arena Floral</h3>
+<p class="precio">$25</p>
 </div>
 
 <!-- LARGAS -->
-<div class="catalog-section">
-<h4>Velas largas</h4>
-
-<div class="catalog-grid">
-
-<div class="catalog-item">
-<img src="Larga.png">
-<div class="price">$15</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
+<div class="producto" data-nombre="Vela Larga Blanca" data-categoria="largas" data-precio="15">
+<img src="https://picsum.photos/300?5">
+<h3>Vela Larga Blanca</h3>
+<p class="precio">$15</p>
 </div>
 
-<div class="catalog-item">
-<img src="Larga 2.png">
-<div class="price">$15</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Larga 3.png">
-<div class="price">$15</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Larga 4.png">
-<div class="price">$15</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Larga 5.png">
-<div class="price">$15</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Larga',15)">Agregar al carrito</button>
-</div>
-
-</div>
+<div class="producto" data-nombre="Vela Larga Roja" data-categoria="largas" data-precio="15">
+<img src="https://picsum.photos/300?6">
+<h3>Vela Larga Roja</h3>
+<p class="precio">$15</p>
 </div>
 
 <!-- DECORATIVAS -->
-<div class="catalog-section">
-<h4>Velas decorativas</h4>
-
-<div class="catalog-grid">
-
-<div class="catalog-item">
-<img src="Decorativa 1.png">
-<div class="price">$30</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+<div class="producto" data-nombre="Vela Luna" data-categoria="decorativas" data-precio="30">
+<img src="https://picsum.photos/300?7">
+<h3>Vela Luna</h3>
+<p class="precio">$30</p>
 </div>
 
-<div class="catalog-item">
-<img src="Decorativa 2.png">
-<div class="price">$30</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Decorativa 3.png">
-<div class="price">$30</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Decorativa 4.png">
-<div class="price">$30</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
-</div>
-
-<div class="catalog-item">
-<img src="Decorativa 5.png">
-<div class="price">$30</div>
-<button class="add-btn" onclick="agregarAlCarrito('Vela Decorativa',30)">Agregar al carrito</button>
+<div class="producto" data-nombre="Vela Dragón" data-categoria="decorativas" data-precio="30">
+<img src="https://picsum.photos/300?8">
+<h3>Vela Dragón</h3>
+<p class="precio">$30</p>
 </div>
 
 </div>
-</div>
+
+<!-- ===== JAVASCRIPT FILTRO DINÁMICO ===== -->
 
 <script>
 
-function agregarAlCarrito(nombre,precio){
-    alert(nombre+" agregado al carrito 🛒 - $" + precio);
+const buscador = document.getElementById("buscador");
+const filtroCategoria = document.getElementById("filtroCategoria");
+const filtroPrecio = document.getElementById("filtroPrecio");
+
+const productos = document.querySelectorAll(".producto");
+
+function filtrarProductos(){
+
+const texto = buscador.value.toLowerCase();
+const categoria = filtroCategoria.value;
+const precio = filtroPrecio.value;
+
+productos.forEach(producto=>{
+
+const nombre = producto.dataset.nombre.toLowerCase();
+const categoriaProducto = producto.dataset.categoria;
+const precioProducto = parseFloat(producto.dataset.precio);
+
+const coincideTexto = nombre.includes(texto);
+const coincideCategoria = categoria === "todos" || categoria === categoriaProducto;
+const coincidePrecio = precio === "todos" || precioProducto <= precio;
+
+if(coincideTexto && coincideCategoria && coincidePrecio){
+producto.style.display="block";
+}else{
+producto.style.display="none";
 }
 
-/* ESTRELLAS */
-function crearEstrellas(){
-const contenedor=document.getElementById("stars");
-contenedor.innerHTML="";
-for(let i=0;i<80;i++){
-let estrella=document.createElement("div");
-estrella.classList.add("star");
-estrella.style.top=Math.random()*100+"%";
-estrella.style.left=Math.random()*100+"%";
-estrella.style.animationDelay=Math.random()*2+"s";
-contenedor.appendChild(estrella);
-}
+});
+
 }
 
-crearEstrellas();
+buscador.addEventListener("input", filtrarProductos);
+filtroCategoria.addEventListener("change", filtrarProductos);
+filtroPrecio.addEventListener("change", filtrarProductos);
 
 </script>
 
