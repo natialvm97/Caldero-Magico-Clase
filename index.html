@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>El Caldero Mágico | Candelas Fantásticas</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -35,7 +36,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
 }
 
-/* 🛒 */
 .cart-btn{
 position:fixed;
 top:20px;
@@ -49,6 +49,7 @@ height:50px;
 cursor:pointer;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
+font-family:'Playfair Display',serif;
 }
 
 .hero{
@@ -58,18 +59,28 @@ border-radius:24px;
 text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.12);
 max-width:900px;
+transition:0.5s;
 }
 
 .hero h1{
 font-family:'Great Vibes',cursive;
 font-size:64px;
 color:#b85c7a;
+margin-bottom:10px;
 }
 
 .hero h2{
 font-size:24px;
 font-style:italic;
 color:#6fa58c;
+margin-bottom:30px;
+}
+
+.hero p{
+font-size:18px;
+color:#555;
+margin-bottom:40px;
+line-height:1.6;
 }
 
 .gallery{
@@ -103,6 +114,21 @@ font-size:18px;
 border-radius:30px;
 cursor:pointer;
 font-family:'Playfair Display',serif;
+transition:all .3s ease;
+}
+
+button:hover{
+background-color:#f7c6d9;
+color:#9c4f6a;
+}
+
+.banner{
+width:100%;
+max-width:1100px;
+display:block;
+margin:40px auto;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .popup{
@@ -123,12 +149,30 @@ padding:30px;
 border-radius:20px;
 width:100%;
 max-width:400px;
+text-align:left;
 }
 
-.cart-item{
+.popup-content h3{
+text-align:center;
+color:#b85c7a;
+margin-bottom:20px;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:10px;
+border:1px solid #ccc;
+font-family:inherit;
+}
+
+.popup-actions{
 display:flex;
 justify-content:space-between;
-margin:8px 0;
+margin-top:20px;
 }
 
 </style>
@@ -137,16 +181,18 @@ margin:8px 0;
 <body>
 
 <button class="moon-btn" onclick="temaOscuro()">🌙</button>
-<button class="cart-btn" onclick="openCart()">🛒 <span id="contador">0</span></button>
+<button class="cart-btn" onclick="openCart()">🛒</button>
 
 <section class="hero">
 
 <h1>El Caldero Mágico</h1>
+
 <h2>Candelas fantásticas, naturales y no tóxicas</h2>
 
 <p>
 Cada candela es una poción de luz: aromas encantados,
-ceras vegetales y un brillo mágico.
+ceras vegetales y un brillo que transforma tu espacio
+en un refugio mágico.
 </p>
 
 <img src="banner 1 v2.png" class="banner">
@@ -164,110 +210,104 @@ ceras vegetales y un brillo mágico.
 <button onclick="openPayment()">Pagos</button>
 </div>
 
+<img src="2.png" class="banner">
+
 </section>
 
 <!-- 🛒 CARRITO -->
+
 <div class="popup" id="cartPopup">
 <div class="popup-content">
 
-<h3>Carrito mágico 🛒</h3>
+<h3>Carrito de compras 🛒</h3>
 
 <div id="cartItems"></div>
 
-<h4>Total: $<span id="cartTotal">0</span></h4>
+<div class="cart-total">
+Total: $<span id="cartTotal">0</span>
+</div>
 
-<input id="coupon" placeholder="Cupón mágico">
+<label>Cupón</label>
+<input type="text" id="coupon">
 
 <button onclick="applyCoupon()">Aplicar cupón</button>
 
-<br><br>
-
+<div class="popup-actions">
 <button onclick="closeCart()">Cerrar</button>
+</div>
 
 </div>
 </div>
 
 <script>
 
-/* ================= TEMA OSCURO ================= */
-
+/* ⭐ MODO OSCURO */
 function temaOscuro(){
-document.body.classList.toggle("dark-mode");
+document.body.classList.toggle("dark-mode")
 }
 
-/* ================= CARRITO GLOBAL ================= */
+/* 🛒 CARRITO CONECTADO ENTRE PAGINAS */
 
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-let descuento = 0;
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+let descuento=0
 
-/* ================= ABRIR / CERRAR ================= */
-
-function openCart(){
-document.getElementById("cartPopup").style.display="flex";
-renderCarrito();
+function agregarAlCarrito(nombre,precio){
+carrito.push({nombre,precio})
+guardar()
+renderCarrito()
 }
 
-function closeCart(){
-document.getElementById("cartPopup").style.display="none";
+function guardar(){
+localStorage.setItem("carrito",JSON.stringify(carrito))
 }
-
-/* ================= RENDER ================= */
 
 function renderCarrito(){
 
-const cont=document.getElementById("cartItems");
-cont.innerHTML="";
+let cont=document.getElementById("cartItems")
+cont.innerHTML=""
 
-let total=0;
+let total=0
 
 carrito.forEach((item,i)=>{
-
-total+=item.precio;
+total+=item.precio
 
 cont.innerHTML+=`
 <div class="cart-item">
 ${item.nombre} - $${item.precio}
 <button onclick="eliminar(${i})">❌</button>
-</div>
-`;
+</div>`
+})
 
-});
+let final=total-(total*descuento)
 
-let final=total-(total*descuento);
+document.getElementById("cartTotal").innerText=
+final.toFixed(2)
 
-document.getElementById("cartTotal").innerText=final.toFixed(2);
-document.getElementById("contador").innerText=carrito.length;
-
-localStorage.setItem("carrito",JSON.stringify(carrito));
+guardar()
 }
-
-/* ================= ELIMINAR ================= */
 
 function eliminar(i){
-carrito.splice(i,1);
-renderCarrito();
+carrito.splice(i,1)
+renderCarrito()
 }
-
-/* ================= CUPON ================= */
 
 function applyCoupon(){
-
-let c=document.getElementById("coupon").value.toLowerCase();
-
-if(c==="dragon"){
-descuento=0.5;
-alert("🔥 Descuento Dragon activado");
-}else{
-descuento=0;
-alert("Cupón inválido");
+let c=document.getElementById("coupon").value
+descuento = (c==="MAGIA10") ? 0.10 : 0
+alert(descuento?"Cupón aplicado ✨":"Cupón inválido")
+renderCarrito()
 }
 
-renderCarrito();
+function openCart(){
+renderCarrito()
+document.getElementById("cartPopup").style.display="flex"
 }
 
-/* ================= AUTO ACTUALIZAR ================= */
+function closeCart(){
+document.getElementById("cartPopup").style.display="none"
+}
 
-renderCarrito();
+renderCarrito()
 
 </script>
 
