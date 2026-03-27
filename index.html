@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>El Caldero Mágico | Candelas Fantásticas</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -36,6 +35,7 @@ box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
 }
 
+/* 🛒 NUEVO */
 .cart-btn{
 position:fixed;
 top:20px;
@@ -158,6 +158,12 @@ color:#b85c7a;
 margin-bottom:20px;
 }
 
+.popup-content label{
+display:block;
+margin-top:10px;
+font-size:14px;
+}
+
 .popup-content input,
 .popup-content textarea,
 .popup-content select{
@@ -180,19 +186,19 @@ margin-top:20px;
 
 <body>
 
+<div class="stars" id="stars"></div>
+
 <button class="moon-btn" onclick="temaOscuro()">🌙</button>
 <button class="cart-btn" onclick="openCart()">🛒</button>
 
 <section class="hero">
 
 <h1>El Caldero Mágico</h1>
-
 <h2>Candelas fantásticas, naturales y no tóxicas</h2>
 
 <p>
-Cada candela es una poción de luz: aromas encantados,
-ceras vegetales y un brillo que transforma tu espacio
-en un refugio mágico.
+Cada candela es una poción de luz: aromas encantados, ceras vegetales
+y un brillo que transforma tu espacio en un refugio mágico.
 </p>
 
 <img src="banner 1 v2.png" class="banner">
@@ -215,10 +221,8 @@ en un refugio mágico.
 </section>
 
 <!-- 🛒 CARRITO -->
-
 <div class="popup" id="cartPopup">
 <div class="popup-content">
-
 <h3>Carrito de compras 🛒</h3>
 
 <div id="cartItems"></div>
@@ -235,42 +239,130 @@ Total: $<span id="cartTotal">0</span>
 <div class="popup-actions">
 <button onclick="closeCart()">Cerrar</button>
 </div>
+</div>
+</div>
 
+<!-- CONTACTO ORIGINAL -->
+<div class="popup" id="popup">
+<div class="popup-content">
+<h3>Contacto mágico ✨</h3>
+
+<form id="contactForm">
+<label>Fecha</label>
+<input type="text" id="date" readonly>
+
+<label>Correo electrónico</label>
+<input type="email" id="email" required>
+
+<label>Mensaje</label>
+<textarea id="message" required></textarea>
+
+<div class="popup-actions">
+<button type="submit">Enviar</button>
+<button type="button" onclick="closePopup()">Cerrar</button>
+</div>
+</form>
 </div>
 </div>
+
+<!-- PAGOS ORIGINAL -->
+<div class="popup" id="paymentPopup">
+<div class="popup-content">
+<h3>Pago Seguro ✨</h3>
+
+<form id="paymentForm">
+
+<label>Nombre completo</label>
+<input type="text" id="fullName" required>
+
+<label>Cédula / ID</label>
+<input type="text" id="idNumber" required>
+
+<label>Correo electrónico</label>
+<input type="email" id="payEmail" required>
+
+<label>Tipo de artículo</label>
+<input type="text" id="itemType" required>
+
+<label>Método de pago</label>
+<select id="paymentMethod" required>
+<option value="">Seleccione</option>
+<option>Tarjeta</option>
+<option>Sinpe</option>
+<option>Transferencia</option>
+</select>
+
+<label>Monto ($)</label>
+<input type="number" id="amount" required>
+
+<div class="popup-actions">
+<button type="submit">Confirmar Compra</button>
+<button type="button" onclick="closePayment()">Cerrar</button>
+</div>
+
+</form>
+</div>
+</div>
+
 
 <script>
 
-/* ⭐ MODO OSCURO */
-function temaOscuro(){
-document.body.classList.toggle("dark-mode")
+/* ⭐ ESTRELLAS */
+function crearEstrellas(){
+const contenedor=document.getElementById("stars");
+contenedor.innerHTML="";
+for(let i=0;i<80;i++){
+let estrella=document.createElement("div");
+estrella.classList.add("star");
+estrella.style.top=Math.random()*100+"%";
+estrella.style.left=Math.random()*100+"%";
+estrella.style.animationDelay=Math.random()*2+"s";
+contenedor.appendChild(estrella);
+}
 }
 
-/* 🛒 CARRITO CONECTADO ENTRE PAGINAS */
+function temaOscuro(){
+document.body.classList.toggle("dark-mode");
+if(document.body.classList.contains("dark-mode")){
+crearEstrellas();
+}
+}
 
-let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+/* POPUPS ORIGINALES */
+function openPopup(){
+document.getElementById('popup').style.display='flex'
+document.getElementById('date').value=new Date().toLocaleDateString()
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none'
+}
+
+function openPayment(){
+document.getElementById('paymentPopup').style.display='flex'
+}
+
+function closePayment(){
+document.getElementById('paymentPopup').style.display='none'
+}
+
+
+/* 🛒 CARRITO */
+let carrito=[]
 let descuento=0
 
 function agregarAlCarrito(nombre,precio){
 carrito.push({nombre,precio})
-guardar()
 renderCarrito()
 }
 
-function guardar(){
-localStorage.setItem("carrito",JSON.stringify(carrito))
-}
-
 function renderCarrito(){
-
 let cont=document.getElementById("cartItems")
 cont.innerHTML=""
-
 let total=0
 
 carrito.forEach((item,i)=>{
 total+=item.precio
-
 cont.innerHTML+=`
 <div class="cart-item">
 ${item.nombre} - $${item.precio}
@@ -279,11 +371,7 @@ ${item.nombre} - $${item.precio}
 })
 
 let final=total-(total*descuento)
-
-document.getElementById("cartTotal").innerText=
-final.toFixed(2)
-
-guardar()
+document.getElementById("cartTotal").innerText=final.toFixed(2)
 }
 
 function eliminar(i){
@@ -294,20 +382,71 @@ renderCarrito()
 function applyCoupon(){
 let c=document.getElementById("coupon").value
 descuento = (c==="MAGIA10") ? 0.10 : 0
-alert(descuento?"Cupón aplicado ✨":"Cupón inválido")
+alert(descuento ? "Cupón aplicado ✨" : "Cupón inválido")
 renderCarrito()
 }
 
-function openCart(){
-renderCarrito()
-document.getElementById("cartPopup").style.display="flex"
+function openCart(){document.getElementById("cartPopup").style.display="flex"}
+function closeCart(){document.getElementById("cartPopup").style.display="none"}
+
+/* FORMULARIOS ORIGINALES */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+e.preventDefault()
+alert('Mensaje guardado localmente ✨')
+this.reset()
+closePopup()
+})
+
+document.getElementById('paymentForm').addEventListener('submit',function(e){
+
+e.preventDefault()
+
+const name=document.getElementById('fullName').value
+const id=document.getElementById('idNumber').value
+const email=document.getElementById('payEmail').value
+const item=document.getElementById('itemType').value
+const method=document.getElementById('paymentMethod').value
+const amount=document.getElementById('amount').value
+
+if(!name||!id||!email||!item||!method||!amount){
+alert("Debe completar todos los campos ✨")
+return
 }
 
-function closeCart(){
-document.getElementById("cartPopup").style.display="none"
-}
+const now=new Date()
+const date=now.toLocaleDateString()
+const time=now.toLocaleTimeString()
 
-renderCarrito()
+const invoice=`
+FACTURA OFICIAL
+Empresa: El Caldero Mágico
+Fecha: ${date}
+Hora: ${time}
+
+Cliente: ${name}
+ID: ${id}
+Correo: ${email}
+
+Artículo: ${item}
+Medio de Pago: ${method}
+Monto: $${amount}
+
+Garantía: 30 días
+Gracias por su compra ✨
+`
+
+const blob=new Blob([invoice],{type:"text/plain"})
+const link=document.createElement("a")
+link.href=URL.createObjectURL(blob)
+link.download="Factura_El_Caldero_Magico.txt"
+link.click()
+
+alert("Compra realizada con éxito ✨ Factura generada.")
+
+this.reset()
+closePayment()
+
+})
 
 </script>
 
