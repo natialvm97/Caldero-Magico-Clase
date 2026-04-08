@@ -25,8 +25,6 @@ h1{
     margin-bottom:40px;
 }
 
-/* ===== CONTROLES AGREGADOS ===== */
-
 .filtros{
 text-align:center;
 margin-bottom:40px;
@@ -41,8 +39,6 @@ border-radius:10px;
 border:none;
 font-family:'Playfair Display';
 }
-
-/* =============================== */
 
 .catalog-section{
     margin-bottom:50px;
@@ -102,8 +98,6 @@ font-family:'Playfair Display';
     background:#4f8b74;
 }
 
-/* DARK MODE + ESTRELLAS (INTACTO) */
-
 .dark-mode{
     background:linear-gradient(135deg,#2b0036,#3d0052);
     color:white;
@@ -149,8 +143,6 @@ font-family:'Playfair Display';
 
 <h1>✨ Catálogo Mágico de Velas ✨</h1>
 
-<!-- ================= BUSCADOR Y FILTROS ================= -->
-
 <div class="filtros">
 
 <input type="text" id="buscador" placeholder="Buscar vela...">
@@ -171,10 +163,6 @@ font-family:'Playfair Display';
 <button onclick="filtrarPrecio(999)">Todas</button>
 
 </div>
-
-<!-- ================== TU CATÁLOGO ORIGINAL ================== -->
-
-<!-- SOLO agregué data-* atributos -->
 
 <!-- VIDRIO -->
 <div class="catalog-section">
@@ -234,7 +222,7 @@ font-family:'Playfair Display';
 
 <script>
 
-/* ================= FILTROS AGREGADOS ================= */
+/* FILTROS */
 
 const buscador=document.getElementById("buscador");
 const categoriaFiltro=document.getElementById("categoriaFiltro");
@@ -264,7 +252,6 @@ let visible=true;
 if(categoria!=="todas" && cat!==categoria) visible=false;
 if(precio>precioMax) visible=false;
 
-/* BUSCA POR NOMBRE DE IMAGEN */
 const nombreImg=item.querySelector("img").src.toLowerCase();
 if(!nombreImg.includes(texto)) visible=false;
 
@@ -274,11 +261,32 @@ item.style.display=visible?"block":"none";
 
 }
 
-/* ================= TU JS ORIGINAL ================= */
+/* CARRITO */
 
 function agregarAlCarrito(nombre,precio){
 alert(nombre+" agregado al carrito 🛒 - $" + precio);
 }
+
+/* ⭐ FIX BOTONES — ONLY ADDITION */
+
+document.querySelectorAll(".catalog-item").forEach(item=>{
+
+const boton=item.querySelector(".add-btn");
+
+if(!boton.getAttribute("onclick")){
+
+const precio=parseFloat(item.dataset.precio);
+const nombre=item.querySelector("img").src.split("/").pop().replace(".png","");
+
+boton.onclick=function(){
+agregarAlCarrito(nombre,precio);
+};
+
+}
+
+});
+
+/* ESTRELLAS */
 
 function crearEstrellas(){
 const contenedor=document.getElementById("stars");
