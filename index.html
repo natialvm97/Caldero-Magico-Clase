@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
+
 body{
 margin:0;
 font-family:'Playfair Display',serif;
@@ -47,6 +48,7 @@ height:50px;
 cursor:pointer;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
+font-family:'Playfair Display',serif;
 }
 
 .hero{
@@ -100,11 +102,13 @@ max-width:400px;
 <button class="cart-btn" onclick="openCart()">🛒</button>
 
 <section class="hero">
+
 <h1>El Caldero Mágico</h1>
 
 <button onclick="window.location.href='hechizos.html'">
 Explorar hechizos
 </button>
+
 </section>
 
 <!-- 🛒 CARRITO -->
@@ -119,7 +123,9 @@ Explorar hechizos
 Total: $<span id="cartTotal">0</span>
 </div>
 
-<input type="text" id="coupon" placeholder="Cupón">
+<label>Cupón</label>
+<input type="text" id="coupon">
+
 <button onclick="applyCoupon()">Aplicar cupón</button>
 
 <button onclick="closeCart()">Cerrar</button>
@@ -129,11 +135,26 @@ Total: $<span id="cartTotal">0</span>
 
 <script>
 
-/* =========================
-   🛒 CARRITO CONECTADO
-========================= */
+/* ⭐ ESTRELLAS (sin cambios) */
 
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+function crearEstrellas(){
+const contenedor=document.getElementById("stars");
+if(!contenedor)return;
+contenedor.innerHTML="";
+for(let i=0;i<80;i++){
+let estrella=document.createElement("div");
+estrella.classList.add("star");
+estrella.style.top=Math.random()*100+"%";
+estrella.style.left=Math.random()*100+"%";
+contenedor.appendChild(estrella);
+}
+}
+
+/* 🛒 CARRITO GLOBAL */
+
+let carrito =
+JSON.parse(localStorage.getItem("carrito")) || [];
+
 let descuento=0;
 
 function agregarAlCarrito(nombre,precio){
@@ -146,6 +167,7 @@ function renderCarrito(){
 
 let cont=document.getElementById("cartItems");
 cont.innerHTML="";
+
 let total=0;
 
 carrito.forEach((item,i)=>{
@@ -184,7 +206,7 @@ function closeCart(){
 document.getElementById("cartPopup").style.display="none";
 }
 
-/* ⭐ cargar carrito al abrir */
+/* cargar carrito automáticamente */
 renderCarrito();
 
 </script>
