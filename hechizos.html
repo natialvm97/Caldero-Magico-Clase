@@ -134,7 +134,6 @@ font-family:'Playfair Display';
 100%{opacity:0;}
 }
 
-/* BOTONES INDEX */
 
 .moon-btn{
 position:fixed;
@@ -258,8 +257,6 @@ font-family:'Playfair Display',serif;
 
 <script>
 
-/* FILTROS */
-
 const buscador=document.getElementById("buscador");
 const categoriaFiltro=document.getElementById("categoriaFiltro");
 
@@ -297,7 +294,6 @@ item.style.display=visible?"block":"none";
 
 }
 
-/* CARRITO */
 
 function agregarAlCarrito(nombre,precio){
 
@@ -310,8 +306,6 @@ localStorage.setItem("carritoMagico",JSON.stringify(carrito));
 alert(" Agregado al carrito! 🛒");
 
 }
-
-/* ⭐ FIX BOTONES — ONLY ADDITION */
 
 document.querySelectorAll(".catalog-item").forEach(item=>{
 
@@ -329,8 +323,6 @@ agregarAlCarrito(nombre,precio);
 }
 
 });
-
-/* ESTRELLAS */
 
 function crearEstrellas(){
 const contenedor=document.getElementById("stars");
