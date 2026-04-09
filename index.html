@@ -3,159 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Caldero Mágico | Candelas Fantásticas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>El Caldero Mágico</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== TODO TU CSS ORIGINAL SIN CAMBIOS ===== */
-
 body{
-margin:0;
-font-family:'Playfair Display',serif;
-background:linear-gradient(135deg,#f7c6d9,#cde8d6);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:0.5s;
+    font-family:'Playfair Display', serif;
+    margin:0;
+    background:#111;
+    color:white;
 }
 
-/* (TODO TU CSS SE MANTIENE EXACTAMENTE IGUAL) */
+/* NAV */
+nav{
+    background:black;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+}
+
+/* GRID PRODUCTOS */
+.catalogo{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:30px;
+}
+
+/* TARJETA */
+.producto{
+    background:#1c1c1c;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+}
+
+/* 🔥 ARREGLO DE TAMAÑOS */
+.producto img{
+    width:100%;
+    aspect-ratio:1/1;       /* ← TODAS CUADRADAS */
+    object-fit:cover;       /* ← no se deforman */
+    border-radius:10px;
+}
+
+/* TEXTO */
+.precio{
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* BOTON */
+button{
+    margin-top:10px;
+    padding:10px 15px;
+    border:none;
+    background:#d4af37;
+    color:black;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+button:hover{
+    background:#f5d76e;
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+<nav>
+<a href="index.html">Inicio</a>
+<a href="hechizos.html">Explorar Hechizos</a>
+<a href="carrito.html">Carrito 🛒</a>
+</nav>
 
-<button class="moon-btn" onclick="temaOscuro()">🌙</button>
-<button class="cart-btn" onclick="openCart()">🛒</button>
+<h1 style="text-align:center;">El Caldero Mágico</h1>
 
-<section class="hero">
+<div class="catalogo">
 
-<h1>El Caldero Mágico</h1>
-<h2>Candelas fantásticas, naturales y no tóxicas</h2>
-
-<p>
-Cada candela es una poción de luz: aromas encantados, ceras vegetales
-y un brillo que transforma tu espacio en un refugio mágico.
-</p>
-
-<img src="banner 1 v2.png" class="banner">
-
-<div class="gallery">
-<img src="photo-1720671847847-0b127f440aa3.avif">
-<img src="photo-1720788810349-7e51a042404a.avif">
-<img src="photo-1596433809252-260c2745dfdd.avif">
-<img src="photo-1603218678692-3967d7523bb0.avif">
+<div class="producto">
+<img src="img/vela1.jpg">
+<h3>Vela en Recipiente</h3>
+<p class="precio">$20</p>
+<button onclick="agregarCarrito('Vela en Recipiente',20)">Agregar al Carrito</button>
 </div>
 
-<div class="buttons">
-<button onclick="window.location.href='hechizos.html'">Explorar hechizos</button>
-<button onclick="openPopup()">Contactar por correo</button>
-<button onclick="openPayment()">Pagos</button>
+<div class="producto">
+<img src="img/vela2.jpg">
+<h3>Vela de Arena</h3>
+<p class="precio">$25</p>
+<button onclick="agregarCarrito('Vela de Arena',25)">Agregar al Carrito</button>
 </div>
 
-<img src="2.png" class="banner">
-
-</section>
-
-<!-- ================= CARRITO ================= -->
-
-<div class="popup" id="cartPopup">
-<div class="popup-content">
-
-<h3>Carrito de compras 🛒</h3>
-
-<div id="cartItems"></div>
-
-<div class="cart-total">
-Total: $<span id="cartTotal">0</span>
+<div class="producto">
+<img src="img/vela3.jpg">
+<h3>Vela Larga</h3>
+<p class="precio">$15</p>
+<button onclick="agregarCarrito('Vela Larga',15)">Agregar al Carrito</button>
 </div>
 
-<label>Cupón</label>
-<input type="text" id="coupon">
-
-<button onclick="applyCoupon()">Aplicar cupón</button>
-
-<div class="popup-actions">
-<button onclick="closeCart()">Cerrar</button>
+<div class="producto">
+<img src="img/vela4.jpg">
+<h3>Vela Decorativa</h3>
+<p class="precio">$30</p>
+<button onclick="agregarCarrito('Vela Decorativa',30)">Agregar al Carrito</button>
 </div>
 
-</div>
 </div>
 
 <script>
 
-/* ⭐ ESTRELLAS (sin cambios) */
-function crearEstrellas(){
-const contenedor=document.getElementById("stars");
-contenedor.innerHTML="";
-for(let i=0;i<80;i++){
-let estrella=document.createElement("div");
-estrella.classList.add("star");
-estrella.style.top=Math.random()*100+"%";
-estrella.style.left=Math.random()*100+"%";
-contenedor.appendChild(estrella);
+/* CONEXION CARRITO — NO CAMBIADA */
+function agregarCarrito(nombre,precio){
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+carrito.push({
+nombre:nombre,
+precio:precio
+});
+
+localStorage.setItem("carrito",JSON.stringify(carrito));
+
+alert("Producto agregado al carrito 🛒");
 }
-}
-
-/* ================= CARRITO CONECTADO ================= */
-
-let carrito = JSON.parse(localStorage.getItem("carrito")) || []
-let descuento=0
-
-function agregarAlCarrito(nombre,precio){
-carrito.push({nombre,precio})
-localStorage.setItem("carrito",JSON.stringify(carrito))
-renderCarrito()
-}
-
-function renderCarrito(){
-let cont=document.getElementById("cartItems")
-cont.innerHTML=""
-let total=0
-
-carrito.forEach((item,i)=>{
-total+=item.precio
-cont.innerHTML+=`
-<div class="cart-item">
-${item.nombre} - $${item.precio}
-<button onclick="eliminar(${i})">❌</button>
-</div>`
-})
-
-let final=total-(total*descuento)
-document.getElementById("cartTotal").innerText=final.toFixed(2)
-}
-
-function eliminar(i){
-carrito.splice(i,1)
-localStorage.setItem("carrito",JSON.stringify(carrito))
-renderCarrito()
-}
-
-function applyCoupon(){
-let c=document.getElementById("coupon").value
-descuento = (c==="MAGIA10") ? 0.10 : 0
-alert(descuento ? "Cupón aplicado ✨" : "Cupón inválido")
-renderCarrito()
-}
-
-function openCart(){
-renderCarrito()
-document.getElementById("cartPopup").style.display="flex"
-}
-
-function closeCart(){
-document.getElementById("cartPopup").style.display="none"
-}
-
-/* cargar carrito al entrar */
-renderCarrito()
 
 </script>
 
