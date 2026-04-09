@@ -134,10 +134,46 @@ font-family:'Playfair Display';
 100%{opacity:0;}
 }
 
+/* BOTONES INDEX */
+
+.moon-btn{
+position:fixed;
+top:20px;
+right:20px;
+font-size:22px;
+background:white;
+border:none;
+border-radius:50%;
+width:50px;
+height:50px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+z-index:1000;
+}
+
+.cart-btn{
+position:fixed;
+top:20px;
+right:95px;
+font-size:22px;
+background:white;
+border:none;
+border-radius:50%;
+width:50px;
+height:50px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+z-index:1000;
+font-family:'Playfair Display',serif;
+}
+
 </style>
 </head>
 
 <body>
+
+<button class="moon-btn" onclick="temaOscuro()">🌙</button>
+<button class="cart-btn" onclick="irCarrito()">🛒</button>
 
 <div class="stars" id="stars"></div>
 
@@ -310,6 +346,9 @@ contenedor.appendChild(estrella);
 }
 
 crearEstrellas();
+
+<button class="moon-btn" onclick="temaOscuro()">🌙</button>
+<button class="cart-btn" onclick="irCarrito()">🛒</button>
 
 </script>
 
