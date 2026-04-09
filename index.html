@@ -1,4 +1,3 @@
-Index:
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -179,6 +178,54 @@ font-family:inherit;
 display:flex;
 justify-content:space-between;
 margin-top:20px;
+}
+
+/* 🌙 MODO OSCURO */
+
+.dark-mode{
+background:linear-gradient(135deg,#2b0036,#3d0052);
+color:white;
+}
+
+.dark-mode .hero{
+background:rgba(30,0,40,0.85);
+color:white;
+}
+
+.dark-mode button{
+background:#5b3a70;
+color:white;
+}
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+overflow:hidden;
+display:none;
+}
+
+.dark-mode .stars{
+display:block;
+}
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0;
+animation:twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
 }
 
 </style>
