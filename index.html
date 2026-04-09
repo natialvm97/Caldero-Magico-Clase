@@ -35,7 +35,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:1000;
 }
 
-/* 🛒 NUEVO */
 .cart-btn{
 position:fixed;
 top:20px;
@@ -184,7 +183,6 @@ justify-content:space-between;
 margin-top:20px;
 }
 
-/* 🌙 MODO OSCURO */
 
 .dark-mode{
 background:linear-gradient(135deg,#2b0036,#3d0052);
@@ -248,7 +246,7 @@ box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
 body{
-padding-top:60px; /* evita que tape contenido */
+padding-top:60px; 
 }
 
 </style>
@@ -387,7 +385,6 @@ Total: $<span id="cartTotal">0</span>
 
 <script>
 
-/* ⭐ ESTRELLAS */
 function crearEstrellas(){
 const contenedor=document.getElementById("stars");
 contenedor.innerHTML="";
@@ -408,7 +405,6 @@ crearEstrellas();
 }
 }
 
-/* POPUPS ORIGINALES */
 function openPopup(){
 document.getElementById('popup').style.display='flex'
 document.getElementById('date').value=new Date().toLocaleDateString()
@@ -426,12 +422,9 @@ function closePayment(){
 document.getElementById('paymentPopup').style.display='none'
 }
 
-
-/* 🛒 CARRITO */
 let carrito=[]
 let descuento=0
 
-/*  SINCRONIZAR CARRITO  */
 const carritoGuardado = localStorage.getItem("carritoMagico");
 
 if(carritoGuardado){
@@ -483,7 +476,6 @@ closeCart();  // cierra carrito
 openPayment();  // abre popup de pago
 }
 
-/* FORMULARIOS ORIGINALES */
 document.getElementById('contactForm').addEventListener('submit',function(e){
 e.preventDefault()
 alert('Mensaje guardado localmente ✨')
@@ -542,12 +534,9 @@ closePayment()
 
 })
 
-/* ABRIR CARRITO SI VIENE DESDE HECHIZOS */
 if(window.location.hash === "#carrito"){
 openCart();
 }
-
-/* ⏳ CUENTA REGRESIVA OFERTA */
 
 const fechaOferta = new Date("April 10, 2026 12:00:00").getTime();
 
