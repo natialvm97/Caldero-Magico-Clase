@@ -345,10 +345,14 @@ contenedor.appendChild(estrella);
 }
 }
 
-crearEstrellas();
 
-<button class="moon-btn" onclick="temaOscuro()">🌙</button>
-<button class="cart-btn" onclick="irCarrito()">🛒</button>
+function temaOscuro(){
+document.body.classList.toggle("dark-mode");
+if(document.body.classList.contains("dark-mode")){
+crearEstrellas();
+}
+}
+
 
 </script>
 
