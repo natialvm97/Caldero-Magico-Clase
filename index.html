@@ -1,3 +1,4 @@
+Index:
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -236,6 +237,7 @@ Total: $<span id="cartTotal">0</span>
 <button onclick="applyCoupon()">Aplicar cupón</button>
 
 <div class="popup-actions">
+<button onclick="openPaymentFromCart()">Pagar ✨</button>
 <button onclick="closeCart()">Cerrar</button>
 </div>
 </div>
@@ -396,6 +398,11 @@ renderCarrito()
 
 function openCart(){document.getElementById("cartPopup").style.display="flex"}
 function closeCart(){document.getElementById("cartPopup").style.display="none"}
+
+function openPaymentFromCart(){
+closeCart();  // cierra carrito
+openPayment();  // abre popup de pago
+}
 
 /* FORMULARIOS ORIGINALES */
 document.getElementById('contactForm').addEventListener('submit',function(e){
