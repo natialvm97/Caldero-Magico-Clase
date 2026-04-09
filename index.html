@@ -105,21 +105,20 @@ justify-content:center;
 flex-wrap:wrap;
 }
 
-button{
-background-color:#cde8d6;
-color:#4f7f6a;
+.add-btn{
+background:#6fa58c;
 border:none;
-padding:14px 40px;
-font-size:18px;
-border-radius:20px;
+padding:10px 15px;
+border-radius:10px;
+color:white;
 cursor:pointer;
+font-size:15px;
+transition:0.3s;
 font-family:'Playfair Display',serif;
-transition:all .3s ease;
 }
 
-button:hover{
-background-color:#f7c6d9;
-color:#9c4f6a;
+.add-btn:hover{
+background:#4f8b74;
 }
 
 .banner{
@@ -211,9 +210,9 @@ y un brillo que transforma tu espacio en un refugio mágico.
 </div>
 
 <div class="buttons">
-<button onclick="window.location.href='hechizos.html'">Explorar hechizos</button>
-<button onclick="openPopup()">Contactar por correo</button>
-<button onclick="openPayment()">Pagos</button>
+<button class="add-btn" onclick="window.location.href='hechizos.html'">Explorar hechizos</button>
+<button class="add-btn" onclick="openPopup()">Contactar por correo</button>
+<button class="add-btn" onclick="openPayment()">Pagos</button>
 </div>
 
 <img src="2.png" class="banner">
@@ -456,6 +455,11 @@ this.reset()
 closePayment()
 
 })
+
+/* ABRIR CARRITO SI VIENE DESDE HECHIZOS */
+if(window.location.hash === "#carrito"){
+openCart();
+}
 
 </script>
 
